@@ -1,0 +1,101 @@
+
+*{
+    font-family: 'Franklin Gothic Bold', 'Arial Narrow', Arial, sans-serif;
+}
+.contenedor_factura{
+    
+    width: 420px;
+    height: auto;
+    text-align: center;
+    /* background-color: blue; */
+  }
+  .img_factura{
+    width: 350px;
+    height: 100px;
+    background-color: brown;
+  }
+  .img_factura img{
+      width: 100%;
+      height: 100%;
+  }
+  .nueva_factura{
+    
+    width: 400px;
+    height: auto;
+    display:flex;
+    justify-content: center;
+
+    font-size: 20px;
+   
+    
+  }
+  body, #contenido, #principal, #pie {
+    float: none !important;
+    width: auto !important;
+    margin:  0 !important;
+    padding: 0 !important;
+  }
+
+  .main-wrapper{
+      display: none;
+  }
+  
+  .ocultar-print{
+      display: none;
+  }
+
+  .contenedor_factura{
+      margin-top: -15px;
+      margin-left: -20px;
+      width: 400px;
+      display: flex;
+      justify-content: center;
+  }
+  .contenedor_factura_dos{
+      margin-top: -15px;
+      margin-left: 20px;
+      width: 400px;
+      display: flex;
+      justify-content: center;
+  }
+
+  .footer_factura{
+        display: block;
+        width: 400px;
+        height: auto;
+        text-align: center;
+        line-height:5px;
+        font-size: 20px;
+        font-weight: bold;
+  }
+  /* .footer_factura h3{
+      display: table;
+  } */
+
+  .menu_ocultar{
+      display: none;
+  }
+  .estilo_ocultar{
+      display: block;
+  }
+
+  .factura_venta{
+      margin-left: 30px;
+  }
+ 
+  .modal-valore{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 0.5;
+  }
+  .precio-total{
+   
+    font-weight: bold;
+    
+  }
+  .info_cliente, .info_tienda{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 0.5;
+  }
+ 

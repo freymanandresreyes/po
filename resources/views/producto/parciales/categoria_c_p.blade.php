@@ -1,0 +1,1 @@
+<option value="{{ $consulta_c_p->id }}">{{ $consulta_c_p->categoria }}</option>

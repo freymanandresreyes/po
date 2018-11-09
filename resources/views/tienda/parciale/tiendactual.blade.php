@@ -1,0 +1,1 @@
+<label>{{ $nombretienda }}</label>
