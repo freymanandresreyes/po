@@ -23,6 +23,8 @@ use App\zonas;
 use App\Quotation;
 use Illuminate\Http\Request;
 use Automattic\WooCommerce\Client;
+use App\Puntos;
+
 
 class FacturasController extends Controller
 {
@@ -472,10 +474,36 @@ class FacturasController extends Controller
                 $consulta_mayor_cliente[0]->configuraciones=2;
                 $consulta_mayor_cliente[0]->save();
             }
+
+
+        /**********************************
+            ACUMULAR PUNTOS POR CLIENTE 10000 PESOS SON 1 PUNTO
+         *********************************/
+        $total = (int)str_ireplace(",","",$request->precio_total);
+        $puntos = intdiv($total, 10000);
+        $consulta_cliente_puntos = clientes::where('id',$request->id_cliente)->first();
+        $consulta_cliente_puntos->puntos=$consulta_cliente_puntos->puntos+$puntos;
+        $consulta_cliente_puntos->save();
+        
+        $puntos_cliente = Puntos::create(
+            [
+                'id_cliente' => $request->id_cliente,
+                'n_factura' => $numero_factura,
+                'puntos' => $puntos
+            ]
+    );
+
+
+
+        /**********************************
+            FIN DE ACUMULAR PUNTOS
+         *********************************/
+
+
       /***************************************************************
           METODO PARA DESCONTAR DEL INVENTARIO DE LA TIENDA VIRTUAL STARA
-          SOLO SI EL PRODUCTO SE VENDE EN STARA MEGACENTRO MEDELLIN
-        /***************************************************************/
+          SOLO SI EL PRODUCTO SE VENDE EN STARA CALLE8
+        /***************************************************************
          if($tienda === 2){
 
         foreach($request->productos as $product){ 

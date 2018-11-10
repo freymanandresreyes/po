@@ -275,7 +275,7 @@ $("#vender_producto").click(function (e) {
     /*********** PAGOS CON TARJETA Y SISTECREDITO ************* */
     /********************************************************** */
     if (tipo_pago == 8) {
-        alert('verifica');
+        // alert('verifica');
         var id_pago = $("input[name='pago']:checked").val();
         var id_banco = $('#lista_bancos').val();
 
@@ -384,7 +384,7 @@ $("#vender_producto").click(function (e) {
     var url = getAbsolutePath() + 'crear_facturas';
 
     $("#vender_producto").prop('disabled',true);
-    alert(precio_total);
+    // alert(precio_total);
     $.ajax({
         url: url,
         type: 'POST',

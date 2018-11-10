@@ -143,13 +143,13 @@
         </li>
         {{-- @endrole --}}
 
-        @can('')
+      
         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-pie-chart"></i><span class="hide-menu">Estadísticas</span></a>
           <ul aria-expanded="true" class="collapse">
             <li><a href="{{ route('inicio_tickets') }}">Inf. tickets</a></li>
           </ul>
         </li>
-        @endcan
+    
         {{-- @can('') --}}
         <li>
           <a href="{{ route('inventario_bodega') }}" class="collapse " href="javascript:void(0)" aria-expanded="true">

@@ -75,32 +75,21 @@ class ComprasController extends Controller
         $codigo = $request->codigo;
         $tienda = $request->tienda;
         
-        $tienda_p=productos::where('id_tienda',$tienda)->get();
-        $tienda_p->each(function($tienda_p){
+        $tienda_p=productos::where([['id_tienda',$tienda],['codigo',$codigo]])->first();
+
+        if(!empty($tienda_p))
+        {
           $tienda_p->categoriaProductos;
   
           $tienda_p->subcategoriaProductos; 
-        });
-        // dd($tienda_p->categoria);
-        if($tienda_p=="[]" || $tienda_p==null)
-        {
+
+          return response()->json($tienda_p);
+          } 
+          else
+         {
           $respuesta = 1;
           return response()->json($respuesta);
         }
-        elseif($tienda_p!="[]" || $tienda_p!=null)
-        {
-          
-          for ($i=0;$i<count($tienda_p);$i++)
-          {
-              if($tienda_p[$i]->codigo==$codigo)
-              {
-                return response()->json($tienda_p[$i]);
-              }
-          }
-          // dd($tienda_p);
-          $respuesta = 1;
-          return response()->json($respuesta);
-        } 
     }
     
 

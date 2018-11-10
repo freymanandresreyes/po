@@ -3,6 +3,7 @@
 // DE CREAR UNA NUEVA COMPRA
 $('#crear_apartado').click(function () {
 
+    $('#crear_apartado').attr('disabled',true);
     var id_cliente = $('#id_cliente').val();
     var suma = 0;
     $('#encabezado_separados tr.dato').each(function () { //filas con clase 'dato', especifica una clase, asi no tomas el nombre de las columnas

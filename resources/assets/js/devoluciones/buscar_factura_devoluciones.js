@@ -148,6 +148,8 @@ $('#registrar_devolucion').click(function () {
 });
 // guardar devolucion
 $('#guardar_devolucion').click(function () {
+
+    $('#guardar_devolucion').attr('disabled',true);
     // ****** VARIABLES ******
     var factura = $('#numero_factura_devolucion').val();
     var id_cliente = $('#id_cliente').val();
