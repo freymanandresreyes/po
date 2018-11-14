@@ -119,7 +119,7 @@
                               <td>{{ Round($factura->precio_oferta/1.19,0) }}</td>
                               <td>{{ $factura->precio_costo }}</td>
                               <td>{{ Round($factura->precio_oferta/1.19,0)-$factura->precio_costo }}</td>
-                              <td>% {{ $f[$i] }}</td>
+                              <td>% {{ $porcentaje[$i] }}</td>
                             </tr>
                           @php
                             $i++;
@@ -132,7 +132,7 @@
                                   <th>FECHA</th>
                                   <th>CODIGO</th>
                                   <th>NOMBRE</th>
-                                  <th>BASE</th>
+                                  <th>{{ number_format(Round($ff/1.19)) }}</th>
                                   <th>COSTO</th>
                                   <th>V/R UTILID</th>
                                   <th>% UTILIDAD</th>

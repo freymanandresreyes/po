@@ -37,81 +37,90 @@ class infoUtilidadFacturaController extends Controller
                             ->where('facturacion','!=',3)
                             ->whereDate('created_at', '>=', $inicio)
                             ->whereDate('created_at', '<=', $fin)->select('n_factura','created_at','precio_base',DB::raw('SUM(precio_costo) as precio_costo'),'id_cliente',DB::raw('SUM(precio_oferta) as precio_oferta'))->groupBy('n_factura')->get();
-                            // dd($busqueda);                   
+                            dd($facturas);                   
         $facturas->each(function ($facturas) {
             $facturas->clientesfactura;
         });
-        // dd($facturas[16]);
+        
         $v_utilidad = [];
         $porcentaje = [];
         $i = 0;
+
+
         foreach($facturas as $factura){
 
-            if($factura->precio_base > $factura->precio_costo){
+            // if($factura->precio_base > $factura->precio_costo){
+            $base1=Round($factura->precio_oferta/1.19,0);
+            // $gg=$base1-$factura->precio_costo;
+            $v_utilidad[$i] = $base1 - $factura->precio_costo;
 
-            $v_utilidad[$i] = round($factura->precio_base - $factura->precio_costo, 2);
+            // }
+            // else if($factura->precio_base < $factura->precio_costo){
+                
+            // $v_utilidad[$i] = round($factura->precio_base - $factura->precio_costo, 2);
 
-            }else if($factura->precio_base < $factura->precio_costo){
+            // }
+            // else if($factura->precio_base == $factura->precio_costo){
+                    
+            // $v_utilidad[$i] = round($factura->precio_base - $factura->precio_costo, 2);
 
-            $v_utilidad[$i] = round($factura->precio_costo - $factura->precio_base, 2);
-
-            }else if($factura->precio_base == $factura->precio_costo){
-
-            $v_utilidad[$i] = round($factura->precio_costo - $factura->precio_base, 2);
-
-            }
+            // }
 
 
             if($v_utilidad[$i] > 0){ 
 
-            $porcentaje_divicion = round(($v_utilidad[$i]/$factura->precio_base), 2);//REVISAR ESTA LINEA DE CODIGO
-            $porcentaje[$i] = $porcentaje_divicion * 100;
+            // $porcentaje_divicion = $v_utilidad[$i]/$base1;//REVISAR ESTA LINEA DE CODIGO
+            $porcentaje[$i] = Round($v_utilidad[$i]/$base1,2) * 100;
           }else{
             $porcentaje[$i] = 0;
           }
+        // $suma=$base+0;
             $i++;
             
         }
-        $f=[];
-        $i=0;
-        foreach($facturas as $factura){
-        $base1=Round($factura->precio_oferta/1.19,0);
-        // dd($base1);
-        $costo1=Round($factura->precio_oferta/1.19,0)-$factura->precio_costo;
-        // dd($costo1);
-        if($base1 > $costo1 ){
-            
-            $f[$i]=Round($base1/$costo1,2)*100;
 
-            }
-        
-        else 
-        if($base1 < $costo1){
 
-            $f[$i]=Round($base1/$costo1,2)*100;
+        $suma_base = facturas::where('id_tienda', $tienda)
+                            ->where('id_clasificaciones', '!=', 1)
+                            ->where('id_clasificaciones', '!=', 2)
+                            ->where('id_clasificaciones', '!=', 3)
+                            ->where('estado', '!=', 1)
+                            ->where('facturacion','!=',3)
+                            ->whereDate('created_at', '>=', $inicio)
+                            ->whereDate('created_at', '<=', $fin)->select(DB::raw('SUM(precio_oferta) as precio_oferta'))->get();
+        // dd($suma_base[0]->precio_oferta);
+        $ff=Intval($suma_base[0]->precio_oferta);
+        // dd($ff/1.19);
 
-            }
-        
-        else if($base1 == $costo1){
 
-            $f[$i]=Round($base1/$costo1,2)*100;
-
-            }
-        // dd($f);
-        $i++;
-        }
+        // $f=[];
         // $i=0;
-        // $suma_precio_costo=0;
-        // $suma_v_utilidad=0;
         // foreach($facturas as $factura){
-                            
-        //     $suma_precio_costo=$suma_precio_costo+$factura->precio_costo;
-        //     $suma_v_utilidad=$suma_v_utilidad+$v_utilidad[$i];
+
+        // $base1=Round($factura->precio_oferta/1.19,0);
+        // $costo1=Round($factura->precio_oferta/1.19,0)-$factura->precio_costo;
+
+        // if($base1 > $costo1 ){
             
-        //   $i++;
-        //   }
-        // dd($suma_precio_costo);
-        // dd($suma_v_utilidad);
+        //     $f[$i]=$base1/$costo1*100;
+
+        //     }
+        
+        // else 
+        // if($base1 < $costo1){
+
+        //     $f[$i]=$base1/$costo1*100;
+
+        //     }
+        
+        // else if($base1 == $costo1){
+
+        //     $f[$i]=$base1/$costo1*100;
+
+        //     }
+        // $i++;
+        // }
+
           return view('informes.utilidadFactura', compact(
             'facturas',
             'v_utilidad',
@@ -120,7 +129,7 @@ class infoUtilidadFacturaController extends Controller
             'inicio',
             'fin',
             'zonas',
-        'f'));
+        'ff'));
     }
 
    /* public function utilidad_factura_consultar1(Request $request)
