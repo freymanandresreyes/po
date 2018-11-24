@@ -106,7 +106,10 @@ mix.scripts([
     //INFORMES PAGOS SISTECREDITO
     "resources/assets/js/sistecredito/buscar_documento.js",
 
-
+    //INFORMES PDON ELKIN
+    "resources/assets/js/informe_elkin/buscar_informe.js",
+    //INFORMES AUDITORIAS
+    "resources/assets/js/auditorias/auditorias.js"
   ],
   "public/js/compilados.js"
 );

@@ -99,6 +99,7 @@
             <li><a href="{{ route('informe_sistecredito') }}">Informe abonos sistecredito</a></li>
             <li><a href="{{ route('informe_inventario') }}">Informe inventario</a></li>
             <li><a href="{{ route('vista_informe_referencias') }}">Informe referencias</a></li>
+            <li><a href="{{ route('vista_informe_elkin') }}">Informe Don Elkin</a></li>
             {{-- @else --}}
             {{-- @can('vista_cajero')  --}}
             {{-- <li><a href="{{ route('info_diario') }}">Inf. Diario</a></li> --}}
@@ -149,7 +150,12 @@
             <li><a href="{{ route('inicio_tickets') }}">Inf. tickets</a></li>
           </ul>
         </li>
-    
+        <li>
+          <a href="{{ route('vista_auditorias') }}" class="collapse " href="javascript:void(0)" aria-expanded="true">
+              <i class="mdi mdi-wrench"></i>
+              <span class="hide-menu">Auditorias</span>
+          </a>
+        </li>
         {{-- @can('') --}}
         <li>
           <a href="{{ route('inventario_bodega') }}" class="collapse " href="javascript:void(0)" aria-expanded="true">

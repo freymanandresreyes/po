@@ -19,25 +19,26 @@
                 </thead>
                 <tbody id="id_facturas">
                     @for ($i = 0 ; $i
-                    < count($consulta); $i++) <tr>
-                        <td>{{ $consulta[$i]->Numero_Factura }}</td>
-                        <td>{{ $consulta[$i]->Nombre_Cliente }}</td>
-                        <td>{{ $consulta[$i]->Cedula_Cliente }}</td>
-                        <td>{{ $consulta[$i]->Fecha }}</td>
-                        <td>{{ $consulta[$i]->hora }}</td>
-                        <td>{{ $consulta[$i]->total }}</td>
-                        <td>
-                            <button type="button" class="btn btn-secondary verFactura" name="{{ $consulta[$i]->Numero_Factura }}">
-                                <i class="fa fa-eye"></i>
-                            </button> 
-                            @role('admin_tiendas') 
-                            @if($consulta[$i]->estado == 0)
-                            <button class="btn btn-danger anular" name="{{ $consulta[$i]->Numero_Factura  }}">Anular</button> 
-                            @else
-                            <button class="btn btn-default" disabled>Anular</button> 
-                            @endif 
-                            @endrole
-                        </td>
+                    < count($consulta); $i++) 
+                        <tr>
+                            <td>{{ $consulta[$i]->Numero_Factura }}</td>
+                            <td>{{ $consulta[$i]->Nombre_Cliente }}</td>
+                            <td>{{ $consulta[$i]->Cedula_Cliente }}</td>
+                            <td>{{ $consulta[$i]->Fecha }}</td>
+                            <td>{{ $consulta[$i]->hora }}</td>
+                            <td>{{ $consulta[$i]->total }}</td>
+                            <td>
+                                <button type="button" class="btn btn-secondary verFactura" name="{{ $consulta[$i]->Numero_Factura }}">
+                                    <i class="fa fa-eye"></i>
+                                </button> 
+                                @role('admin_tiendas') 
+                                @if($consulta[$i]->estado == 0)
+                                <button class="btn btn-danger anular" name="{{ $consulta[$i]->Numero_Factura  }}">Anular</button> 
+                                @else
+                                <button class="btn btn-default" disabled>Anular</button> 
+                                @endif 
+                                @endrole
+                            </td>
                         </tr>
                         @endfor
 

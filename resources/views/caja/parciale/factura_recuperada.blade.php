@@ -15,10 +15,16 @@
 <div class="info_cliente" >
 <p>FACTURA DE VENTA</p>
 <p class="text-uppercase">Nº {{ $num_facturta }} FECHA: {{ $fecha_factura }}</p>
-
 <p>CLIENTE: {{ $contenido[0]->clientesfactura['nombres']." ". $contenido[0]->clientesfactura['apellidos'] }}</p>
 <p>NIT: {{ $contenido[0]->clientesfactura['documento'] }}</p>
 <p>TELEF: {{ $contenido[0]->clientesfactura['telefono']}}</p>
+@if(count($consulta_puntos_f)==0)
+<P>PUNTOS FACTURA: 0</P>
+<P>ESTA FACTURA NO ACUMULO PUNTOS</P>
+@else
+<P>PUNTOS FACTURA: {{ $consulta_puntos_f[0]->puntos_f }}</P>
+@endif
+<p>TOTAL PUNTOS CLIENTE: {{ $contenido[0]->clientesfactura['puntos']}}</p>
 <p>VENDED: {{ $contenido[0]->vendedoresfactura['nombres'] }}</p>
 <p>CAJERO: {{ $contenido[0]->userfactura['name'] }}</p>
 <p class="text-muted m-l-5" id="datos_cliente">

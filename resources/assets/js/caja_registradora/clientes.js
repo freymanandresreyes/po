@@ -93,10 +93,14 @@ function buscar_separado(dato) {
               //  console.log(fila);
               var conteo = $('#encabezado tr:last');
               conteo.after(fila);
+              suma_productos=i+1;
               //fin agregar producto apartado
-
+              
             }
             // calcular_saldo();
+
+            $('#ind_total_productos').html(suma_productos);
+              // $('#ind_total_otros').html(suma_otros);
 
             $('#abono').val(parseFloat(saldo_efectivo) + parseFloat(saldo_tarjeta_uno) + parseFloat(saldo_tarjeta_dos));
 
@@ -122,7 +126,7 @@ function buscar_separado(dato) {
             /****************+ FIN *************************** */
             buscar_saldo_apartado(id_cliente);
             /*************************************************** */
-            $('#codigo_producto').prop('disabled', true);
+            $('#codigo_producto').prop('disabled', false);
             alertify.success("Has pulsado '" + alertify.labels.ok + "'");
           } else {
             buscar_saldo_devolucion(id_cliente);
@@ -248,6 +252,7 @@ $("#documento_cliente").keydown(function (e) {
           $("#telefono_cliente").val(respuesta.telefono);
           $("#datos_cliente").html(respuesta.nombres + ' ' + respuesta.apellidos + '<br/> Nº.' + respuesta.documento + '<br/>' + respuesta.direccion + '<br/>' + respuesta.telefono);
           $('#tipo_cliente').val(respuesta.confiusuarios_clientes.id_tipo_usuario);
+          $('#ind_total_puntos').html(respuesta.puntos);
 
           //habilitar los input para agregar productos a la factura.
           $('#codigo_producto').prop('disabled', false);

@@ -72,7 +72,7 @@ class FacturasController extends Controller
                     return view('caja.registradora', compact('list_tag', 'configuraciones', 'info_tienda', 'vendedores', 'bancos'));
                 }
             } else {
-                return redirect('/')->with('info', 'caja serrada.');
+                return redirect('/')->with('info', 'caja cerrada.');
             }
         } else {
             if ($caja_user == null) {
@@ -585,7 +585,13 @@ class FacturasController extends Controller
             $num_facturta = $contenido[0]['n_factura'];
             $fecha_factura = $contenido[0]['created_at'];
             $cliente = clientes::find($id_cliente);
-            return response()->json(view('caja.parciale.factura', compact('encabezado', 'contenido', 'cliente', 'num_facturta', 'fecha_factura', 'datos_asesor', 'tipo_factura', 'tipo_pago'))->render());
+
+            $consulta_puntos_f=DB::table('cliente_puntos')
+            ->select('cliente_puntos.puntos AS puntos_f')
+            ->where('cliente_puntos.n_factura',$num_facturta)
+            ->get();
+            // dd($consulta_puntos_f[0]->puntos_f);
+            return response()->json(view('caja.parciale.factura', compact('encabezado', 'consulta_puntos_f' ,'contenido', 'cliente', 'num_facturta', 'fecha_factura', 'datos_asesor', 'tipo_factura', 'tipo_pago'))->render());
         }
     }
 
@@ -620,7 +626,11 @@ class FacturasController extends Controller
         $fecha_factura = $contenido[0]['created_at']->format('d/m/Y');
         $total_venta = null;
 
-        //  dd(count($contenido));
+        $consulta_puntos_f=DB::table('cliente_puntos')
+            ->select('cliente_puntos.puntos AS puntos_f')
+            ->where('cliente_puntos.n_factura',$seleccion)
+            ->get();
+
         for ($i = 0; $i < count($contenido); $i++) {
             $total_venta = $total_venta + ($contenido[$i]['total']);
         }
@@ -638,7 +648,8 @@ class FacturasController extends Controller
                 'fecha_factura',
                 'total_venta',
                 'subtotal',
-                'iva_venta'
+                'iva_venta',
+                'consulta_puntos_f'
             ))->render());
         }
 

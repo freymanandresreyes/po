@@ -21,6 +21,8 @@
     <P>CLIENTE: {{ $cliente->nombres." ".$cliente->apellidos }}</P>
     <P>NIT: {{ $cliente->documento }}</P>
     <P>TELEF: {{ $cliente->telefono}}</P>
+    <P>PUNTOS FACTURA: {{ $consulta_puntos_f[0]->puntos_f }}</P>
+    <P>TOTAL PUNTOS: {{ $cliente->puntos }}</P>
     <P>VENTA: {{ $tipo_factura }} </P>
     <P>T/PAGO: {{ $tipo_pago }}</P>
     <P>VENDED: {{ $datos_asesor->nombres }}</P>

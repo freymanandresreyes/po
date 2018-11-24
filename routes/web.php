@@ -405,4 +405,16 @@ Route::group(['middleware' => 'auth'], function () {
     /*==================================================*/
     Route::get('carga_masiva', 'CargaMasivaController@carga_masiva')->name('carga_masiva');
     Route::post('subir_carga_masiva', 'CargaMasivaController@subir_carga_masiva')->name('subir_carga_masiva');
+
+    /*==================================================*/
+    // RUTAS PARA INFORME DON ELKIN
+    /*==================================================*/
+    Route::get('vista_informe_elkin', 'InformeElkinController@vista_informe_elkin')->name('vista_informe_elkin');
+    Route::get('generar_informe_elkin', 'InformeElkinController@generar_informe_elkin')->name('generar_informe_elkin');
+    
+    /*==================================================*/
+    // RUTAS PARA VISTA AUDITORIAS
+    /*==================================================*/
+    Route::get('vista_auditorias', 'AuditoriasController@vista_auditorias')->name('vista_auditorias');
+    Route::get('buscar_facturas_auditorias', 'AuditoriasController@buscar_facturas_auditorias')->name('buscar_facturas_auditorias');
   });

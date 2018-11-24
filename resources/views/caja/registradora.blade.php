@@ -121,7 +121,24 @@
         </div>
 
       </div>
-
+      <div class="row">
+                      <div class="col-lg-6">
+                        <div class="row">
+                          <!-- column -->
+                          <div class="col-md-6">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Puntos Acumulados</h5>
+                                <div class="d-flex m-t-30 m-b-20 no-block align-items-center">
+                                  <span class="display-5 text-info"><i class="ti ti-medall"></i></span>
+                                  <a class="link display-5 ml-auto" id="ind_total_puntos">0</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- column -->
+                        </div>
+                      </div>
       {{-- ======================================================== --}} {{-- ========================================================
       --}}
       <div class="card-body">
