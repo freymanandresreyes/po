@@ -108,6 +108,8 @@ mix.scripts([
 
     //INFORMES PDON ELKIN
     "resources/assets/js/informe_elkin/buscar_informe.js",
+    "resources/assets/js/informe_elkin/cargar_tiendas.js",
+
     //INFORMES AUDITORIAS
     "resources/assets/js/auditorias/auditorias.js"
   ],

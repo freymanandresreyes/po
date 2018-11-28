@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\tiendas;
+use App\zonas;
 use DB;
 
 
@@ -10,12 +12,14 @@ class InformeElkinController extends Controller
 {
     public function vista_informe_elkin()
     {
-        return view('informe_elkin.informe_elkin');
+        $zonas = zonas::all();
+        return view('informe_elkin.informe_elkin', compact('zonas'));
     }
 
 
     public function generar_informe_elkin(Request $request)
     {
+        $tienda=$request->tienda;
         $fecha1=$request->fecha1;
         $fecha2=$request->fecha2;
         $consulta=DB::table('facturas')
@@ -25,7 +29,7 @@ class InformeElkinController extends Controller
                     ->where('facturas.id_clasificaciones','!=',1)
                     // ->where('facturas.codigo','!=',0)
                     ->where('facturas.estado','=',0)
-                    ->where('facturas.id_tienda',[10,11])
+                    ->where('facturas.id_tienda','=',$tienda)
                     ->whereDate('facturas.created_at','>=',$fecha1)
                     ->whereDate('facturas.created_at','<=',$fecha2)     
                     ->get();

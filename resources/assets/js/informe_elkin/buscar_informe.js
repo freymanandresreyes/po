@@ -1,8 +1,14 @@
 $('#generar_informe_elkin').click(function()
 {
+    var tienda=$('#informe_tienda_select').val();
     var fecha1=$('#fecha1').val();
     var fecha2=$('#fecha2').val();
 
+    if(tienda==""){
+        alertify.error("DEBES ELEGIR UNA TIENDA.");
+        return false;
+    }
+    alert(tienda);
     if(fecha1=="" || fecha2==""){
         alertify.error("LAS FECHAS SON REQUERIDAS.");
         return false;
@@ -14,6 +20,7 @@ $('#generar_informe_elkin').click(function()
         url: url,
         type: "GET",
         data: {
+          tienda: tienda,
           fecha1: fecha1,
           fecha2: fecha2,
         },
