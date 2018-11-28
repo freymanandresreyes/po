@@ -25,13 +25,11 @@ class InformeElkinController extends Controller
         $consulta=DB::table('facturas')
                     ->select('facturas.codigo AS codigo','tiendas.slug as bodega','facturas.total AS total')
                     ->join('tiendas', 'facturas.id_tienda', '=', 'tiendas.id')
-                    ->where('facturas.total','>',100)
-                    ->where('facturas.id_clasificaciones','!=',1)
-                    // ->where('facturas.codigo','!=',0)
-                    ->where('facturas.estado','=',0)
                     ->where('facturas.id_tienda','=',$tienda)
+                    ->where('facturas.total','>',100)
                     ->whereDate('facturas.created_at','>=',$fecha1)
                     ->whereDate('facturas.created_at','<=',$fecha2)     
+                    ->where('facturas.estado','=',0)
                     ->get();
 
         return response()->json(view('informe_elkin.parciales.tabla', compact('consulta'))->render());
