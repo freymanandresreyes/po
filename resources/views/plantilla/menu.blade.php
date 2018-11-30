@@ -44,7 +44,8 @@
             <li><a href="{{ route('compras') }}">Compras</a></li>
             <li><a href="{{ route('listarcompras') }}">Aceptar Compras</a></li>
             <li><a href="{{ route('ver_productos') }}">Admin promociones</a></li>
-            <li><a href="{{ route('carga_masiva') }}">Carga Masiva</a></li>
+            <li><a href="{{ route('carga_masiva_compras') }}">Carga Masiva Compras</a></li>
+            <li><a href="{{ route('carga_masiva_productos') }}">Carga Masiva Productos</a></li>
             <li><a href="{{ route('ver_inventario') }}">Inventario</a></li>
             {{-- @else --}}
               {{-- @can('vista_cajero') --}}
@@ -77,9 +78,9 @@
         {{-- @can('') --}}
         {{-- @can('') --}}
         <li>
-          <a href="{{ route('bonos') }}" class="collapse" href="javascript:void(0)" aria-expanded="true">
+          <a href="{{ route('registrar_bono') }}" class="collapse" href="javascript:void(0)" aria-expanded="true">
             <i class="ti-gift"></i>
-            <span class="hide-menu">Reg. Bonos</span>
+            <span class="hide-menu">Registrar Bonos</span>
           </a>
         </li>
         {{-- @endcan --}}

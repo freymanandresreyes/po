@@ -20,6 +20,9 @@ var app = new Vue({
     valorTotalAbonosFacturaSistecredito: [],
     tiendasZona: [],
     facturasReferencia: '',
+    documentoCliente: '',
+    codigoBono: '',
+    dataClient: '',
   },
   methods:{
         buscaApartado(consecutivo){
@@ -162,6 +165,48 @@ var app = new Vue({
           }).catch(error => {
              this.loaderVue = false;
              alertify.error('No se ha podido cargar la lista de facturas!<br>Contacte con el administrador.');
+           });
+        },
+        consultaCliente(){
+          this.codigoBono = '';
+          this.loaderVue = true;
+          axios.post('consulta_cliente', {
+             documento: this.documentoCliente,
+          }).then(response => {
+                this.loaderVue = false;
+                this.dataClient = response.data;
+                if(response.data.data === '' || response.data.data === undefined){
+                  alertify.error('No existe un cliente con ese documento.');
+                  $("#documento").val(this.documentoCliente);
+                  $('#modalBono').modal('show');
+                }
+          }).catch(error => {
+             this.loaderVue = false;
+             alertify.error('No se ha podido cargar la informacion del cliente!<br>Contacte con el administrador.');
+           });
+        },
+        registraCliente(){
+          this.codigoBono = '';
+          axios.post('crear_cliente', {
+              nombre: $("#nombre").val(),
+              apellido: $("#apellido").val(),
+              documento: this.documentoCliente,
+              direccion: $("#direccion").val(),
+              telefono: $("#telefono").val(),
+              fecha: $("#fecha").val(),
+              correo: $("#correo").val()
+          }).then(response => {
+                if(response.data.id_cliente === '' || response.data.id_cliente === undefined){
+                  alertify.error('El cliente no se ha podido crear!.');
+                }else{
+                  $('#myModal').modal('hide');
+                  alertify.success('No existe un cliente con ese documento.');
+                  $("#contAbono").show();
+                  alertify.success('Puedes registrar un abono a este cliente.');
+                }
+          }).catch(error => {
+             this.loaderVue = false;
+             alertify.error('No se ha podido crear el cliente!<br>Contacte con el administrador.');
            });
         },
         print(){

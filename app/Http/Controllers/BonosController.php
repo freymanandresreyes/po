@@ -8,9 +8,9 @@ use App\bonos;
 
 class BonosController extends Controller
 {
-    public function bonos()
+    public function registrar_bono()
     {
-        return view('bonos.bonos');
+        return view('bonos.registrar_bono');
     }
 
     

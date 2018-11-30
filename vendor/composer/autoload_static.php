@@ -84,6 +84,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         ),
         'J' => 
         array (
+            'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
             'JakubOnderka\\PhpConsoleColor\\' => 29,
         ),
         'I' => 
@@ -254,6 +255,10 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
+        'JakubOnderka\\PhpConsoleHighlighter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
+        ),
         'JakubOnderka\\PhpConsoleColor\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
@@ -350,13 +355,6 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
                 0 => __DIR__ . '/..' . '/laracasts/flash/src',
             ),
         ),
-        'J' => 
-        array (
-            'JakubOnderka\\PhpConsoleHighlighter' => 
-            array (
-                0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
-            ),
-        ),
         'D' => 
         array (
             'Doctrine\\Common\\Lexer\\' => 
@@ -371,6 +369,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'App\\CargaMasiva' => __DIR__ . '/../..' . '/app/CargaMasiva.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AuditoriasController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuditoriasController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -395,6 +394,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'App\\Http\\Controllers\\GruposController' => __DIR__ . '/../..' . '/app/Http/Controllers/GruposController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\InformeDevolucionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/InformeDevolucionesController.php',
+        'App\\Http\\Controllers\\InformeElkinController' => __DIR__ . '/../..' . '/app/Http/Controllers/InformeElkinController.php',
         'App\\Http\\Controllers\\InformeUnoController' => __DIR__ . '/../..' . '/app/Http/Controllers/InformeUnoController.php',
         'App\\Http\\Controllers\\InformesController' => __DIR__ . '/../..' . '/app/Http/Controllers/InformesController.php',
         'App\\Http\\Controllers\\InventarioBodegaController' => __DIR__ . '/../..' . '/app/Http/Controllers/InventarioBodegaController.php',
@@ -440,6 +440,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'App\\Traits\\ControlCaja' => __DIR__ . '/../..' . '/app/traits/ControlCaja.php',
         'App\\Traits\\informeGeneral' => __DIR__ . '/../..' . '/app/traits/informeGeneral.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\auditorias' => __DIR__ . '/../..' . '/app/auditorias.php',
         'App\\bonos' => __DIR__ . '/../..' . '/app/bonos.php',
         'App\\cajamenor' => __DIR__ . '/../..' . '/app/cajamenor.php',
         'App\\categorias' => __DIR__ . '/../..' . '/app/categorias.php',
@@ -1909,7 +1910,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
-        'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
         'JsonSerializable' => __DIR__ . '/..' . '/nesbot/carbon/src/JsonSerializable.php',
         'Laracasts\\Flash\\Flash' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/Flash.php',
         'Laracasts\\Flash\\FlashNotifier' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/FlashNotifier.php',
@@ -2125,6 +2126,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'Monolog\\Handler\\HandlerWrapper' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/HandlerWrapper.php',
         'Monolog\\Handler\\HipChatHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/HipChatHandler.php',
         'Monolog\\Handler\\IFTTTHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/IFTTTHandler.php',
+        'Monolog\\Handler\\InsightOpsHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/InsightOpsHandler.php',
         'Monolog\\Handler\\LogEntriesHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/LogEntriesHandler.php',
         'Monolog\\Handler\\LogglyHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/LogglyHandler.php',
         'Monolog\\Handler\\MailHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/MailHandler.php',
@@ -2163,11 +2165,15 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'Monolog\\Processor\\MemoryUsageProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/MemoryUsageProcessor.php',
         'Monolog\\Processor\\MercurialProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/MercurialProcessor.php',
         'Monolog\\Processor\\ProcessIdProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/ProcessIdProcessor.php',
+        'Monolog\\Processor\\ProcessorInterface' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/ProcessorInterface.php',
         'Monolog\\Processor\\PsrLogMessageProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/PsrLogMessageProcessor.php',
         'Monolog\\Processor\\TagProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/TagProcessor.php',
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'Monolog\\ResettableInterface' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ResettableInterface.php',
+        'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
+        'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
         'PHPExcel' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel.php',
         'PHPExcel_Autoloader' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Autoloader.php',
         'PHPExcel_Best_Fit' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Shared/trend/bestFitClass.php',
@@ -2220,6 +2226,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'PHPExcel_Chart_Layout' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Chart/Layout.php',
         'PHPExcel_Chart_Legend' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Chart/Legend.php',
         'PHPExcel_Chart_PlotArea' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Chart/PlotArea.php',
+        'PHPExcel_Chart_Properties' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Chart/Properties.php',
         'PHPExcel_Chart_Renderer_jpgraph' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Chart/Renderer/jpgraph.php',
         'PHPExcel_Chart_Title' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Chart/Title.php',
         'PHPExcel_Comment' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Comment.php',
@@ -2236,7 +2243,6 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'PHPExcel_NamedRange' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/NamedRange.php',
         'PHPExcel_Polynomial_Best_Fit' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Shared/trend/polynomialBestFitClass.php',
         'PHPExcel_Power_Best_Fit' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Shared/trend/powerBestFitClass.php',
-        'PHPExcel_Properties' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Chart/Properties.php',
         'PHPExcel_Reader_Abstract' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Abstract.php',
         'PHPExcel_Reader_CSV' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/CSV.php',
         'PHPExcel_Reader_DefaultReadFilter' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/DefaultReadFilter.php',
@@ -2245,9 +2251,16 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'PHPExcel_Reader_Excel2007_Chart' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel2007/Chart.php',
         'PHPExcel_Reader_Excel2007_Theme' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel2007/Theme.php',
         'PHPExcel_Reader_Excel5' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5.php',
+        'PHPExcel_Reader_Excel5_Color' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/Color.php',
+        'PHPExcel_Reader_Excel5_Color_BIFF5' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/Color/BIFF5.php',
+        'PHPExcel_Reader_Excel5_Color_BIFF8' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/Color/BIFF8.php',
+        'PHPExcel_Reader_Excel5_Color_BuiltIn' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/Color/BuiltIn.php',
+        'PHPExcel_Reader_Excel5_ErrorCode' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/ErrorCode.php',
         'PHPExcel_Reader_Excel5_Escher' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/Escher.php',
         'PHPExcel_Reader_Excel5_MD5' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/MD5.php',
         'PHPExcel_Reader_Excel5_RC4' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/RC4.php',
+        'PHPExcel_Reader_Excel5_Style_Border' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/Style/Border.php',
+        'PHPExcel_Reader_Excel5_Style_FillPattern' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Excel5/Style/FillPattern.php',
         'PHPExcel_Reader_Exception' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Exception.php',
         'PHPExcel_Reader_Gnumeric' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/Gnumeric.php',
         'PHPExcel_Reader_HTML' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Reader/HTML.php',
@@ -2312,6 +2325,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'PHPExcel_Worksheet_ColumnCellIterator' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Worksheet/ColumnCellIterator.php',
         'PHPExcel_Worksheet_ColumnDimension' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Worksheet/ColumnDimension.php',
         'PHPExcel_Worksheet_ColumnIterator' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Worksheet/ColumnIterator.php',
+        'PHPExcel_Worksheet_Dimension' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Worksheet/Dimension.php',
         'PHPExcel_Worksheet_Drawing' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Worksheet/Drawing.php',
         'PHPExcel_Worksheet_Drawing_Shadow' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Worksheet/Drawing/Shadow.php',
         'PHPExcel_Worksheet_HeaderFooter' => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes/PHPExcel/Worksheet/HeaderFooter.php',
@@ -3125,6 +3139,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'Psr\\SimpleCache\\CacheException' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheException.php',
         'Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheInterface.php',
         'Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/simple-cache/src/InvalidArgumentException.php',
@@ -3562,6 +3577,7 @@ class ComposerStaticInita518abb22ac0d380b8a7a875de3d0246
         'Symfony\\Component\\Debug\\FatalErrorHandler\\FatalErrorHandlerInterface' => __DIR__ . '/..' . '/symfony/debug/FatalErrorHandler/FatalErrorHandlerInterface.php',
         'Symfony\\Component\\Debug\\FatalErrorHandler\\UndefinedFunctionFatalErrorHandler' => __DIR__ . '/..' . '/symfony/debug/FatalErrorHandler/UndefinedFunctionFatalErrorHandler.php',
         'Symfony\\Component\\Debug\\FatalErrorHandler\\UndefinedMethodFatalErrorHandler' => __DIR__ . '/..' . '/symfony/debug/FatalErrorHandler/UndefinedMethodFatalErrorHandler.php',
+        'Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/ContainerAwareEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',

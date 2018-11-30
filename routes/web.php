@@ -80,7 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
     /* =================================================*/
     Route::get('clienteConsultar', 'ClientesController@clienteConsultar');
     Route::get('crearcliente', 'ClientesController@crearcliente');
-
+    Route::post('crear_cliente', 'ClientesController@crear_cliente');
+    Route::post('consulta_cliente', 'ClientesController@consulta_cliente');
     /*==================================================*/
     /* RUTAS PARA EL CONTROLADOR CREAR ProductosController
     /* =================================================*/
@@ -229,9 +230,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     /*==================================================*/
-    // RUTAS PARA LOS BONOS DEL POST
+    // RUTAS PARA LOS BONOS
     /*==================================================*/
-    Route::get('bonos',['as'=>'bonos','uses'=>'BonosController@bonos']);
+    Route::get('registrar_bono','BonosController@registrar_bono')->name('registrar_bono');
 
     /*==================================================*/
     // RUTAS PARA REMISIONES
@@ -403,9 +404,10 @@ Route::group(['middleware' => 'auth'], function () {
     /*==================================================*/
     // RUTAS PARA CARGA MASIVA
     /*==================================================*/
-    Route::get('carga_masiva', 'CargaMasivaController@carga_masiva')->name('carga_masiva');
-    Route::post('subir_carga_masiva', 'CargaMasivaController@subir_carga_masiva')->name('subir_carga_masiva');
-
+    Route::get('carga_masiva_compras', 'CargaMasivaController@carga_masiva_compras')->name('carga_masiva_compras');
+    Route::post('subir_carga_masiva_compras', 'CargaMasivaController@subir_carga_masiva_compras')->name('subir_carga_masiva_compras');
+    Route::get('carga_masiva_productos', 'CargaMasivaController@carga_masiva_productos')->name('carga_masiva_productos');
+    Route::post('subir_carga_masiva_productos', 'CargaMasivaController@subir_carga_masiva_productos')->name('subir_carga_masiva_productos');
     /*==================================================*/
     // RUTAS PARA INFORME DON ELKIN
     /*==================================================*/
