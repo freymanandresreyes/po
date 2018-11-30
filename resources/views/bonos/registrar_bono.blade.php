@@ -37,14 +37,21 @@
             </div>
           </form>
           <hr>
-          <div class="col-lg-12 col-md-12" style="display: none;" id="contAbono">
+          <div class="col-lg-12 col-md-12" style="display: none;" id="contBono">
+            <form class="form-horizontal" v-on:submit.prevent>
+               <div class="form-body">
             <div class="form-group row">
                <label class="control-label text-right col-md-3">Digite el codigo del bono:</label>
               <div class="col-md-9">
-                <input type="text" id="codigoBono" v-model="codigoBono" class="form-control" >
+                <input type="text" id="codigoBono" required="" v-model="codigoBono" class="form-control" v-on:keyup.enter="registraBono">
                 <small class="form-control-feedback"> Codigo del bono. </small>
               </div>
             </div>
+             <div class="text-right">
+                <button type="button" v-on:click="registraBono" class="btn btn-success">REGISTRAR BONO</button>
+              </div>
+            </div>
+          </form>
           </div>
         </div>
       </div>

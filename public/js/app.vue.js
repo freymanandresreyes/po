@@ -23,6 +23,7 @@ var app = new Vue({
     documentoCliente: '',
     codigoBono: '',
     dataClient: '',
+    id_cliente: '',
   },
   methods:{
         buscaApartado(consecutivo){
@@ -161,7 +162,6 @@ var app = new Vue({
           }).then(response => {
                 this.loaderVue = false;
                 this.facturasReferencia = response.data;
-                console.log(this.facturasReferencia);
           }).catch(error => {
              this.loaderVue = false;
              alertify.error('No se ha podido cargar la lista de facturas!<br>Contacte con el administrador.');
@@ -174,11 +174,21 @@ var app = new Vue({
              documento: this.documentoCliente,
           }).then(response => {
                 this.loaderVue = false;
-                this.dataClient = response.data;
-                if(response.data.data === '' || response.data.data === undefined){
+                this.dataClient = response.data.info;
+                if(JSON.stringify(response.data)=='{}'){
+                  $("#contBono").hide();
                   alertify.error('No existe un cliente con ese documento.');
+                  $("#nombreCliente").val('');
                   $("#documento").val(this.documentoCliente);
                   $('#modalBono').modal('show');
+                }else if(response.data.estado === 1){
+                   $("#nombreCliente").val(this.dataClient.nombres +' '+ this.dataClient.apellidos);
+                   this.id_cliente = this.dataClient.id;
+                   $("#contBono").show();
+                   alertify.success('Puedes registrar un bono a este cliente.');
+                }else if(response.data.estado === 0){
+                  $("#nombreCliente").val(this.dataClient.nombres +' '+ this.dataClient.apellidos);
+                  alertify.error('El cliente ya tiene un bono registrado!');
                 }
           }).catch(error => {
              this.loaderVue = false;
@@ -196,17 +206,43 @@ var app = new Vue({
               fecha: $("#fecha").val(),
               correo: $("#correo").val()
           }).then(response => {
-                if(response.data.id_cliente === '' || response.data.id_cliente === undefined){
-                  alertify.error('El cliente no se ha podido crear!.');
-                }else{
-                  $('#myModal').modal('hide');
-                  alertify.success('No existe un cliente con ese documento.');
-                  $("#contAbono").show();
-                  alertify.success('Puedes registrar un abono a este cliente.');
-                }
+                  $('#modalBono').modal('hide');
+                  $("#nombreCliente").val($("#nombre").val() +' '+ $("#apellido").val());
+                  alertify.success('El cliente fue creado correctamente!');
+                  this.id_cliente = response.data;
+                  $("#contBono").show();
+                  alertify.success('Puedes registrar un bono a este cliente.');
+                   $("#nombre").val('');
+                   $("#apellido").val('');
+                   $("#direccion").val('');
+                   $("#telefono").val('');
+                   $("#fecha").val('');
+                   $("#correo").val('');
           }).catch(error => {
              this.loaderVue = false;
              alertify.error('No se ha podido crear el cliente!<br>Contacte con el administrador.');
+           });
+        },
+        registraBono(){
+          this.loaderVue = true;
+          axios.post('registra_bono', {
+             id_cliente: this.id_cliente,
+             bono: this.codigoBono
+          }).then(response => {
+               if(response.data.estado === 1){ 
+                alertify.success('Se registro el bono correctamente!');
+                this.codigoBono = '';
+                this.dataClient = '';
+                this.documentoCliente = '';
+                $("#contBono").hide();
+                $("#nombreCliente").val('');
+                alertify.log('Ya puedes realizar otra asignacion de bono!');
+                }else if(response.data.estado === 0){
+                  alertify.error(response.data.message);
+                }
+          }).catch(error => {
+             this.loaderVue = false;
+             alertify.error('No se ha podido registrar el bono!<br>Contacte con el administrador.');
            });
         },
         print(){

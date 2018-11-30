@@ -233,7 +233,7 @@ Route::group(['middleware' => 'auth'], function () {
     // RUTAS PARA LOS BONOS
     /*==================================================*/
     Route::get('registrar_bono','BonosController@registrar_bono')->name('registrar_bono');
-
+    Route::post('registra_bono','BonosController@registra_bono')->name('registra_bono');
     /*==================================================*/
     // RUTAS PARA REMISIONES
     /*==================================================*/

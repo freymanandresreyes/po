@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\clientes;
+use App\bonos;
 
 class ClientesController extends Controller
 {
@@ -51,7 +52,20 @@ class ClientesController extends Controller
   public function consulta_cliente(Request $request){
 
     $data = clientes::where('documento','=',$request->documento)->select('id','nombres','apellidos','documento')->first();
+
+    if(!empty($data)){
+      
+      $consulta_bono = bonos::where('cliente', '=',$data->id)->first();
+
+      if(!empty($consulta_bono)){
+        return ['info' => $data,'estado' => 0];
+      }else{
+         return ['info' => $data,'estado' => 1];
+      }
+
+    }else{
     return response()->json($data,200);
+    }
   }
 
 
@@ -68,9 +82,7 @@ class ClientesController extends Controller
      $nuevo->configuraciones = 1;
      $nuevo->save();
      
-     $id_cliente = $nuevo->id;
-
-     return response()->json($id_cliente,200);
+     return $nuevo->id;
       //return response()->json($consulta)->render()
 
   }
