@@ -52,10 +52,11 @@ var app = new Vue({
           alertify.confirm('No se ha podido visualizar el apartado!<br>Contacte con el administrador.');      
       });
         },
-        buscaTraslado(traslado_id){
+        buscaTraslado(fecha_traslado){
          axios.post('visualizar_traslado', {
-         traslado_id: traslado_id
+         fecha_traslado: fecha_traslado
       }).then(response => {
+        console.log(response.data);
           this.traslado = response.data;
       }).catch(error => {
           $('#print_traslado').modal('hide');

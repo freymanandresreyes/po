@@ -297,10 +297,13 @@ class RemisionesController extends Controller
     }
 
     public function visualizar_traslado(Request $request){
-        $traslado = remisiones::where('id', $request->traslado_id)->first();
-        $traslado->tiendaremisionrecibe;
-        $traslado->tiendaremisionenvia;
-        $traslado->remisionProducto;
+        $tienda_user = $request->user()->tienda;
+        $traslado = remisiones::where('created_at','=',$request->fecha_traslado)->get();
+        $traslado->each(function($traslado){ 
+            $traslado->tiendaremisionrecibe;
+            $traslado->tiendaremisionenvia;
+            $traslado->remisionProducto;
+        });
         return $traslado;
     }
 }
