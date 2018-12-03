@@ -419,4 +419,11 @@ Route::group(['middleware' => 'auth'], function () {
     /*==================================================*/
     Route::get('vista_auditorias', 'AuditoriasController@vista_auditorias')->name('vista_auditorias');
     Route::get('buscar_facturas_auditorias', 'AuditoriasController@buscar_facturas_auditorias')->name('buscar_facturas_auditorias');
+
+
+    /*==================================================*/
+    // RUTAS PARA los bonos en caja
+    /*==================================================*/
+    Route::get('descuento_bono_cliente', 'BonosController@descuento_bono_cliente')->name('descuento_bono_cliente');
+
   });
