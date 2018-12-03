@@ -196,6 +196,7 @@ var app = new Vue({
            });
         },
         registraCliente(){
+          $("#registraClienteBoton").attr('disabled',true);
           this.codigoBono = '';
           axios.post('crear_cliente', {
               nombre: $("#nombre").val(),
@@ -218,8 +219,10 @@ var app = new Vue({
                    $("#telefono").val('');
                    $("#fecha").val('');
                    $("#correo").val('');
+                   $("#registraClienteBoton").attr('disabled',false);
           }).catch(error => {
              this.loaderVue = false;
+             $("#registraClienteBoton").attr('disabled',false);
              alertify.error('No se ha podido crear el cliente!<br>Contacte con el administrador.');
            });
         },
