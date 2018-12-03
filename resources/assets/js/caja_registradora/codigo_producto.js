@@ -163,7 +163,32 @@ $("#codigo_producto").keypress(function (e) {
         $('#caja_clasificacion_producto').val(clasificacion);
 
         $("#codigo_producto").prop('disabled', true);
-            
+
+
+        // descuento
+        // De
+        // BONOS
+        var cliente=$('#id_cliente').val();
+        var url22 = getAbsolutePath() + 'descuento_bono_cliente';
+        $.ajax({
+          url: url22,
+          type: 'GET',
+          data: {
+            cliente: cliente
+          },
+          dataType: 'json',
+          success: function (respuesta) {
+            if(respuesta!=0)
+            {
+              $('#caja_descuento').prop('disabled', true);
+              $('#caja_descuento').val(respuesta);            
+            }
+            else{
+              $('#caja_descuento').prop('disabled', false);
+              $('#caja_descuento').val(0);
+            }
+          }//fin del success
+        });//fin de ajax
           }else if(aplicar_iva == 2){
             // producto sin iva
 
@@ -235,6 +260,32 @@ $("#codigo_producto").keypress(function (e) {
         $('#caja_clasificacion_producto').val(clasificacion);
 
         $("#codigo_producto").prop('disabled', true);
+
+
+        // descuento
+        // De
+        // BONOS
+        var cliente=$('#id_cliente').val();
+        var url22 = getAbsolutePath() + 'descuento_bono_cliente';
+        $.ajax({
+          url: url22,
+          type: 'GET',
+          data: {
+            cliente: cliente
+          },
+          dataType: 'json',
+          success: function (respuesta) {
+            if(respuesta!=0)
+            {
+              $('#caja_descuento').prop('disabled', true);
+              $('#caja_descuento').val(respuesta);            
+            }
+            else{
+              $('#caja_descuento').prop('disabled', false);
+              $('#caja_descuento').val(0);
+            }
+          }//fin del success
+        });//fin de ajax
 
           }
           
@@ -314,8 +365,35 @@ $("#codigo_producto").keypress(function (e) {
         $('#caja_clasificacion_producto').val(clasificacion);
 
         $("#codigo_producto").prop('disabled', true);
+
+
+        // descuento
+        // De
+        // BONOS
+        var cliente=$('#id_cliente').val();
+        var url22 = getAbsolutePath() + 'descuento_bono_cliente';
+        $.ajax({
+          url: url22,
+          type: 'GET',
+          data: {
+            cliente: cliente
+          },
+          dataType: 'json',
+          success: function (respuesta) {
+            if(respuesta!=0)
+            {
+              $('#caja_descuento').prop('disabled', true);
+              $('#caja_descuento').val(respuesta);            
+            }
+            else{
+              $('#caja_descuento').prop('disabled', false);
+              $('#caja_descuento').val(0);
+            }
+          }//fin del success
+        });//fin de ajax
         }
       }
+      
     }//fin del success
   }).fail( function( jqXHR, textStatus, errorThrown ) {
 
@@ -354,5 +432,3 @@ $("#codigo_producto").keypress(function (e) {
   return (e.which != 13);
 }
 });
-
-

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\bonos;
+use DB;
 
 class BonosController extends Controller
 {
@@ -43,7 +44,22 @@ class BonosController extends Controller
     		return ['message' => 'El cliente ya tiene un bono registrado!', 'estado' => 0];
     	}
 
-    } 
+	}
+	
+
+	public function descuento_bono_cliente(Request $request){
+		$consulta=DB::table('bonos')
+        ->select('bonos.valor AS valor')
+        ->where('bonos.cliente','=',$request->cliente)
+		->get();
+		if(count($consulta)==0)
+		{
+			$consulta[0]->valor=0;
+			return response()->json($consulta[0]->valor);
+		}else{
+			return response()->json($consulta[0]->valor);
+		}
+	}
 
     
 }
