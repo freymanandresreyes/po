@@ -249,6 +249,9 @@ var app = new Vue({
              alertify.error('No se ha podido registrar el bono!<br>Contacte con el administrador.');
            });
         },
+        soloNumeros(){
+         this.valorAbonoFacturaSistecredito = parseInt(this.valorAbonoFacturaSistecredito);
+        },
         print(){
         var facturaPrint = $(".facturaVue");
         $("body").html(facturaPrint);
