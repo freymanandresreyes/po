@@ -111,7 +111,10 @@ mix.scripts([
     "resources/assets/js/informe_elkin/cargar_tiendas.js",
 
     //INFORMES AUDITORIAS
-    "resources/assets/js/auditorias/auditorias.js"
+    "resources/assets/js/auditorias/auditorias.js",
+
+    //INFORMES AUDITORIAS
+    "resources/assets/js/informe_elkin_devoluciones/buscar_informe_devoluciones.js"
   ],
   "public/js/compilados.js"
 );

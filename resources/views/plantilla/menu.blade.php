@@ -101,6 +101,7 @@
             <li><a href="{{ route('informe_inventario') }}">Informe inventario</a></li>
             <li><a href="{{ route('vista_informe_referencias') }}">Informe referencias</a></li>
             <li><a href="{{ route('vista_informe_elkin') }}">Informe Don Elkin</a></li>
+            <li><a href="{{ route('vista_informe_elkin_devoluciones') }}">Informe Don Elkin</a></li>
             {{-- @else --}}
             {{-- @can('vista_cajero')  --}}
             {{-- <li><a href="{{ route('info_diario') }}">Inf. Diario</a></li> --}}
