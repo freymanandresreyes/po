@@ -35,7 +35,7 @@
                             @else<td><span class="label label-danger">SIN ACEPTAR</span></td>
                             @endif
                             <td class="text-center">
-                               <button data-toggle="modal" data-target="#print_traslado" title="Visualizar traslado" type="button" v-on:click="buscaTraslado('{{ $consulta[$i]->id }}')" class="btn btn-default"><i class="fa fa-eye"></i></button> 
+                               <button data-toggle="modal" data-target="#print_traslado" title="Visualizar traslado" type="button" v-on:click="buscaTraslado('{{ $consulta[$i]->created_at }}')" class="btn btn-default"><i class="fa fa-eye"></i></button> 
                             </td> 
                         </tr>
                     @endfor
@@ -44,9 +44,9 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="print_traslado" tabindex="-1" role="dialog" aria-labelledby="print_apartado_label" style="    top: inherit;">
+<div class="modal fade ov" id="print_traslado" tabindex="-1" role="dialog" aria-labelledby="print_apartado_label" style="    top: inherit;">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content"id="factura_compra">
       <div class="modal-body">
         <div class="modal-body">
             <div class="card card-body">
@@ -61,7 +61,7 @@
              <div class="info_cliente" v-if="!(traslado == '')">
                 <p>FACTURA DE TRASLADO</p>
                       <p id="datos_cliente" class="text-muted m-l-5">
-                        <p>FECHA: @{{ traslado.created_at }}</p>  
+                        <p>FECHA: @{{ traslado[0].created_at }}</p>  
                       </p>
                        <div class="row">
                         <div class="col-md-12">
@@ -77,12 +77,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>@{{ traslado.remision_producto.titulo }}</td>
-                                    <td>@{{ traslado.codigo }}</td>
-                                    <td>@{{ traslado.cantidad }}</td>
-                                    <td>@{{ traslado.tiendaremisionenvia.nombre_tienda }}</td>
-                                    <td>@{{ traslado.tiendaremisionrecibe.nombre_tienda }}</td>
+                                <tr v-for="tras in traslado">
+                                    <td>@{{ tras.remision_producto.titulo }}</td>
+                                    <td>@{{ tras.codigo }}</td>
+                                    <td>@{{ tras.cantidad }}</td>
+                                    <td>@{{ tras.tiendaremisionenvia.nombre_tienda }}</td>
+                                    <td>@{{ tras.tiendaremisionrecibe.nombre_tienda }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -143,7 +143,7 @@
 <div class="info_cliente">
    <p>FACTURA DE TRASLADO</p>
 <p id="datos_cliente" class="text-muted m-l-5">
- <p>FECHA: @{{ traslado.created_at }}</p>                         
+ <p>FECHA: @{{ traslado[0].created_at }}</p>                         
 </p>
 </div>         
 <div class="row">
@@ -160,12 +160,12 @@
             </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>@{{ traslado.remision_producto.titulo }}</td>
-            <td>@{{ traslado.codigo }}</td>
-            <td>@{{ traslado.cantidad }}</td>
-            <td>@{{ traslado.tiendaremisionenvia.nombre_tienda }}</td>
-            <td>@{{ traslado.tiendaremisionrecibe.nombre_tienda }}</td>
+        <tr v-for="tras in traslado">
+            <td>@{{ tras.remision_producto.titulo }}</td>
+            <td>@{{ tras.codigo }}</td>
+            <td>@{{ tras.cantidad }}</td>
+            <td>@{{ tras.tiendaremisionenvia.nombre_tienda }}</td>
+            <td>@{{ tras.tiendaremisionrecibe.nombre_tienda }}</td>
         </tr>
         </tbody>
     </table>

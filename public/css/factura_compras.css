@@ -15,7 +15,9 @@
 .modal-sinborde{
     border-style: none;
 }
-
+.modal.ov {
+    overflow: unset;
+}
 /*=============================================
 ESCRITORIO GRANDE (LG revisamos en 1366px en adelante)
 =============================================*/

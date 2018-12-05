@@ -52,10 +52,11 @@ var app = new Vue({
           alertify.confirm('No se ha podido visualizar el apartado!<br>Contacte con el administrador.');      
       });
         },
-        buscaTraslado(traslado_id){
+        buscaTraslado(fecha_traslado){
          axios.post('visualizar_traslado', {
-         traslado_id: traslado_id
+         fecha_traslado: fecha_traslado
       }).then(response => {
+        console.log(response.data);
           this.traslado = response.data;
       }).catch(error => {
           $('#print_traslado').modal('hide');
@@ -196,6 +197,7 @@ var app = new Vue({
            });
         },
         registraCliente(){
+          $("#registraClienteBoton").attr('disabled',true);
           this.codigoBono = '';
           axios.post('crear_cliente', {
               nombre: $("#nombre").val(),
@@ -218,8 +220,10 @@ var app = new Vue({
                    $("#telefono").val('');
                    $("#fecha").val('');
                    $("#correo").val('');
+                   $("#registraClienteBoton").attr('disabled',false);
           }).catch(error => {
              this.loaderVue = false;
+             $("#registraClienteBoton").attr('disabled',false);
              alertify.error('No se ha podido crear el cliente!<br>Contacte con el administrador.');
            });
         },
@@ -244,6 +248,9 @@ var app = new Vue({
              this.loaderVue = false;
              alertify.error('No se ha podido registrar el bono!<br>Contacte con el administrador.');
            });
+        },
+        soloNumeros(){
+         this.valorAbonoFacturaSistecredito = parseInt(this.valorAbonoFacturaSistecredito);
         },
         print(){
         var facturaPrint = $(".facturaVue");
