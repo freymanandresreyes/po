@@ -249,6 +249,17 @@ var app = new Vue({
              alertify.error('No se ha podido registrar el bono!<br>Contacte con el administrador.');
            });
         },
+        optionsCargaMasiva(){
+         if($("#opcion").val() == 1){//Verificar que la opcion seleccionada es una compra
+          $("#contTienda").show();
+          $("#contBodega").hide();
+          $("#bodega").removeAttr('required');
+         }else if($("#opcion").val() == 2){//Verificar que la opcion seleccionada es un traslado
+          $("#contTienda").show();
+          $("#contBodega").show();
+          $("#bodega").attr('required','required');
+         }
+        },
         soloNumeros(){
          this.valorAbonoFacturaSistecredito = parseInt(this.valorAbonoFacturaSistecredito);
         },

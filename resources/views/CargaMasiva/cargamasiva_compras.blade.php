@@ -1,6 +1,7 @@
 @extends('layout')
 @section('contenido')
 <br>
+<div id="appVue">
   <div class="row">
     <div class="col-lg-12">
       <div class="card ">
@@ -14,15 +15,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="control-label text-right col-md-3">Tiendas:</label>
+                    <label class="control-label text-right col-md-3">Tipo de masivo:</label>
                     <div class="col-md-9">
-                      <select  class="form-control custom-select" name="tienda" required="">
+                      <select  class="form-control custom-select" name="opcion" required="" id="opcion" @change="optionsCargaMasiva">
                           <option disabled value="" selected>Selecciona Una Opcion</option>
-                          @foreach ( $consulta as $consulta)
-                              <option value="{{ $consulta->id }}">{{ $consulta->slug }}</option>
-                          @endforeach                 
+                          <option value="1">COMPRAS</option>
+                          <option value="2">TRASLADO</option>           
                       </select>
-                      <small class="form-control-feedback">Todas las Tiendas. </small>
+                      <small class="form-control-feedback">Tipo de masivo. </small>
                     </div>
                   </div>
                 </div>
@@ -36,6 +36,36 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+              <div class="col-md-6" style="display: none;" id="contTienda">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-3">Selecciona una tienda:</label>
+                    <div class="col-md-9">
+                      <select  class="form-control custom-select" name="tienda" required="" id="tienda">
+                          <option disabled value="" selected>Selecciona Una tienda</option>
+                          @foreach ($data as $consulta)
+                              <option value="{{ $consulta->id }}">{{ $consulta->slug }}</option>
+                          @endforeach                 
+                      </select>
+                      <small class="form-control-feedback">Selecciona una tienda. </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" style="display: none;" id="contBodega">
+                  <div class="form-group row">
+                    <label class="control-label text-right col-md-3">Selecciona una bodega:</label>
+                    <div class="col-md-9">
+                      <select  class="form-control custom-select" name="bodega" id="bodega">
+                          <option disabled value="" selected>Selecciona Una Opcion</option>
+                          @foreach ($data as $consulta)
+                              <option value="{{ $consulta->id }}">{{ $consulta->slug }}</option>
+                          @endforeach                 
+                      </select>
+                      <small class="form-control-feedback">Selecciona una bodega. </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="text-right">
                 <button type="submit" id="submit-compras" class="btn btn-success" onclick="return confirm('¿Esta seguro de cargar el archivo?')">Cargar archivo</button>
               </div>
@@ -45,6 +75,7 @@
       </div>
     </div>
   </div>
+</div>
   @endsection
   @section('codigo')
   <script type="text/javascript">
