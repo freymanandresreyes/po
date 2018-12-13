@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\bonos;
 use DB;
+use App\tiendas;
 
 class BonosController extends Controller
 {
@@ -49,9 +50,14 @@ class BonosController extends Controller
 
 	public function descuento_bono_cliente(Request $request){
 		$consulta=DB::table('bonos')
-        ->select('bonos.valor AS valor')
+        ->select('bonos.descuento AS valor')
         ->where('bonos.cliente','=',$request->cliente)
 		->get();
+
+        $tienda = tiendas::where('id', '=', $request->user()->tienda)->select('grupo')->first();
+
+        if($tienda->grupo == 1){
+
 		if(count($consulta)==0)
 		{
 			$consulta[0]->valor=0;
@@ -59,6 +65,10 @@ class BonosController extends Controller
 		}else{
 			return response()->json($consulta[0]->valor);
 		}
+    }else{
+
+       return response()->json(0); 
+    }
 	}
 
     
