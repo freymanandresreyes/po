@@ -1,6 +1,11 @@
 $('#caja_agregar_producto').on('click', function(){
 
-  
+  var validacion_codigo=$('#codigo_producto').val();
+  var validacion_precio=$('#caja_precio').val();
+
+  if (validacion_codigo == "" || validacion_precio == "") {
+    return false;
+  }
   
   var fila = '<tr class="dato"><td> ' + $('#caja_titulo').val() +
   '</td><td>' + $('#codigo_producto').val() +

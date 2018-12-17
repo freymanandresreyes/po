@@ -181,7 +181,9 @@ $("#codigo_producto").keypress(function (e) {
             if(respuesta!=0)
             {
               $('#caja_descuento').prop('disabled', true);
-              $('#caja_descuento').val(respuesta);            
+              $('#caja_descuento').val(respuesta);
+              $('#caja_total').val(-precio_total*respuesta/100+precio_total);
+
             }
             else{
               $('#caja_descuento').prop('disabled', false);
@@ -278,7 +280,8 @@ $("#codigo_producto").keypress(function (e) {
             if(respuesta!=0)
             {
               $('#caja_descuento').prop('disabled', true);
-              $('#caja_descuento').val(respuesta);            
+              $('#caja_descuento').val(respuesta);
+              $('#caja_total').val(-precio_total*respuesta/100+precio_total);
             }
             else{
               $('#caja_descuento').prop('disabled', false);
@@ -286,7 +289,6 @@ $("#codigo_producto").keypress(function (e) {
             }
           }//fin del success
         });//fin de ajax
-
           }
           
         }else{
@@ -383,7 +385,8 @@ $("#codigo_producto").keypress(function (e) {
             if(respuesta!=0)
             {
               $('#caja_descuento').prop('disabled', true);
-              $('#caja_descuento').val(respuesta);            
+              $('#caja_descuento').val(respuesta);
+              $('#caja_total').val(-precio_total*respuesta/100+precio_total);
             }
             else{
               $('#caja_descuento').prop('disabled', false);
