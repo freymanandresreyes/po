@@ -53,9 +53,35 @@ class CargaMasivaController extends Controller
         Excel::selectSheetsByIndex(0)->load($request->file('excel'), function($reader) use($request) {
         
           $excel = $reader->get();
+
+
+            //if(!isset($consecutivo_nuevo) && empty($consecutivo_nuevo)){ //Verficar que el nuevo consecutivo para el traslado ya existe 
+
+            //Obtener el ultimo consecutivo de traslado de la tienda
+            $consecutivo_traslado = consecutivos::where([['id_tienda','=',$request->tienda],['tag','LIKE','%TRAS%']])->orderBy('consecutivo','DESC')->first();
+
+            if(empty($consecutivo_traslado)){//Verificar que existe un consecutivo de traslado en la tienda seleccionada
+
+              $consecutivo_nuevo = 'TRAS-1';
+              $consecutivo_new = new consecutivos;
+              $consecutivo_new->id_tienda = $request->tienda;
+              $consecutivo_new->tag = 'TRAS';
+              $consecutivo_new->consecutivo = 1;
+              $consecutivo_new->save();
+
+            }else{// Si ya existe el consecutivo se aumenta 1 al nuevo consecutivo
+              $consecutivo_nuevo = 'TRAS-'.($consecutivo_traslado->consecutivo + 1);
+              $consecutivo_new = new consecutivos;
+              $consecutivo_new->id_tienda = $request->tienda;
+              $consecutivo_new->tag = 'TRAS';
+              $consecutivo_new->consecutivo = ($consecutivo_traslado->consecutivo + 1);
+              $consecutivo_new->save();
+            }
+          //}
+
           
           //iteración de registros
-          $reader->each(function($row) use($request) {
+          $reader->each(function($row) use($request,$consecutivo_nuevo) {
              
              if($request->opcion == 1){ //Verificar que el masivo es una compra
 
@@ -120,30 +146,6 @@ class CargaMasivaController extends Controller
              if(!empty($producto_tienda) && !empty($producto_bodega)){//Verificar que el producto 
 
                   if($producto_bodega->cantidad >= $row->cantidad){//Verificar que el producto en la bodega tenga la cantidad mayor o igual a la que se esta pidiendo en la compra, para descontar de inventario del producto
-
-                      if(!isset($consecutivo_nuevo) && empty($consecutivo_nuevo)){ //Verficar que el nuevo consecutivo para el traslado ya existe 
-
-                      //Obtener el ultimo consecutivo de traslado de la tienda
-                      $consecutivo_traslado = consecutivos::where([['id_tienda','=',$request->tienda],['tag','LIKE','%TRAS%']])->orderBy('consecutivo','DESC')->first();
-
-                      if(empty($consecutivo_traslado)){//Verificar que existe un consecutivo de traslado en la tienda seleccionada
-
-                        $consecutivo_nuevo = 'TRAS-1';
-                        $consecutivo_new = new consecutivos;
-                        $consecutivo_new->id_tienda = $request->tienda;
-                        $consecutivo_new->tag = 'TRAS';
-                        $consecutivo_new->consecutivo = 1;
-                        $consecutivo_new->save();
-
-                      }else{// Si ya existe el consecutivo se aumenta 1 al nuevo consecutivo
-                        $consecutivo_nuevo = 'TRAS-'.($consecutivo_traslado->consecutivo + 1);
-                        $consecutivo_new = new consecutivos;
-                        $consecutivo_new->id_tienda = $request->tienda;
-                        $consecutivo_new->tag = 'TRAS';
-                        $consecutivo_new->consecutivo = ($consecutivo_traslado->consecutivo + 1);
-                        $consecutivo_new->save();
-                      }
-                    }
 
                       //Nueva compra 
                      $compra = [ 
