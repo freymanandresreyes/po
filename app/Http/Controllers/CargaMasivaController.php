@@ -86,7 +86,7 @@ class CargaMasivaController extends Controller
              if($request->opcion == 1){ //Verificar que el masivo es una compra
 
              //Nueva compra 
-             $compra = [ 
+            /* $compra = [ 
              'id_proveedor'       => 1,
              'codigo_producto'    => $row->codigo_producto,
              'numero_factura'     => $row->numero_factura,
@@ -111,7 +111,7 @@ class CargaMasivaController extends Controller
              'descuento_oferta'   => 0,
              'configuraciones'    => $row->configuraciones,
              'aplicar_iva'        => 1
-            ];
+            ];*/
 
               //Buscar el producto
               $producto = productos::where([['codigo', '=', $row->codigo_producto],['id_tienda', '=', $request->tienda]])->first();
@@ -119,9 +119,123 @@ class CargaMasivaController extends Controller
               if(!empty($producto)){ //Si el producto existe en esa tienda se registra la compra
                 $compra['id_producto'] = $producto->id;
               //Registrar la compra en la BD
-              $compra_save = DB::table('compras')->insert($compra);
+               $compra_save = new compras;
+               $compra_save->id_proveedor       = 1;
+               $compra_save->codigo_producto    = $row->codigo_producto;
+               $compra_save->numero_factura     = $row->numero_factura;
+               $compra_save->forma_pago         = $row->forma_pago;
+               $compra_save->fecha              = $row->fecha;
+               $compra_save->fecha_vencimiento  = $row->fecha_vencimiento;
+               $compra_save->cantidad           = $row->cantidad;
+               $compra_save->costo_und          = $row->costo_und;
+               $compra_save->compra_total       = $row->compra_total;
+               $compra_save->iva_compra         = $row->iva_compra;
+               $compra_save->total_compra       = $row->total_compra;
+               $compra_save->iva                = 19;
+               $compra_save->id_tienda          = $request->tienda;
+               $compra_save->id_user            = $row->id_user;
+               $compra_save->id_producto        = $row->id_producto;
+               $compra_save->created_at         = date('Y-m-d H:i:s');
+               $compra_save->updated_at         = date('Y-m-d H:i:s');
+               $compra_save->estado             = 0;
+               $compra_save->precio_detal       = $row->precio_detal;
+               $compra_save->precio_mayor       = $row->precio_mayor;
+               $compra_save->oferta             = 2;
+               $compra_save->descuento_oferta   = 0;
+               $compra_save->configuraciones    = $row->configuraciones;
+               $compra_save->aplicar_iva        = 1;
+               $compra_save->save();
 
               if(!empty($compra_save)){
+
+                if($request->tienda == 14){//Verficar que la bodega donde se suba la compra sea solo la bodega stara cucuta
+                    
+                  // consulta tabla compras
+                  // para traer datos relacionados a productos
+                  $id_compra = $compra_save->id;
+                  
+                  $consulta=compras::find($id_compra);
+                  $tienda = $consulta->id_tienda;
+                  $codigo=$consulta->codigo_producto;
+                  $cantidad=$consulta->cantidad;
+                  $precio_detal = $consulta->precio_detal;
+                  $precio_mayor = $consulta->precio_mayor;
+                  $precio_costo = $consulta->costo_und;
+                  $oferta = $consulta->oferta;
+                  $descuento_oferta = $consulta->descuento_oferta;
+                  $configuraciones = $consulta->configuraciones;
+                  $aplicar_iva = $consulta->aplicar_iva;
+                  // dd($consulta);
+                  
+                  // consulta a la tabla productos
+                  $producto=productos::where('id_tienda',$tienda)
+                  ->where('codigo',$codigo)->get();
+                //   dd($producto[0]['cantidad']);
+                  $cantidad_producto=$producto[0]['cantidad'];
+                  $cantidad_producto_ingreso=$producto[0]['cantidad_ingreso'];
+                    // dd($producto);
+                  if($cantidad_producto==0)
+                  {
+                    $producto[0]['cantidad_ingreso']=($cantidad + $cantidad_producto_ingreso);
+                    $producto[0]['cantidad']=$cantidad;
+                    $producto[0]['precio']=$precio_detal;
+                    $producto[0]['precio_mayorista']=$precio_mayor;
+                    $producto[0]['precio_costo']=$precio_costo;
+                    $producto[0]['oferta']=$oferta;
+                    $producto[0]['descuentoOferta']=$descuento_oferta;
+                    $producto[0]['id_configuraciones']=$configuraciones;
+                    $producto[0]['aplicar_iva']=$aplicar_iva;
+                    $producto[0]->save();
+                    $consulta->estado=1;
+                    $consulta->save();
+                  }
+                  elseif ($cantidad_producto>0) {
+                    // PROMEDIO PONDERADO
+                    // PARTE DE SOLO PRECIO
+                    $precio_bd=$producto[0]['precio'];
+                    $cantidad_bd=$producto[0]['cantidad'];
+                    $total_bd=$precio_bd*$cantidad_bd;
+                    $precio_r=floatval($precio_detal);
+                    $cantidad_r=$cantidad;
+                    $total_r=$precio_r*$cantidad_r;
+                    $total=$total_bd+$total_r;
+                    $total_cantidades=$cantidad_r+$cantidad_bd;
+                    $fintotal=$total/$total_cantidades;
+                    
+                    //  PROMEDIO PONDERADO
+                    // PARTE DE SOLO PRECIO MAYORISTA
+                    $precio_mayorista_bd=$producto[0]['Precio_mayorista'];
+                    $cantidad_mayorista_bd=$producto[0]['cantidad'];
+                    $total_mayorista_bd=$precio_mayorista_bd*$cantidad_mayorista_bd;
+                    $precio_mayorista_r=floatval($precio_mayor);
+                    $cantidad_mayorista_r=$cantidad;
+                    $total_mayorista_r=$precio_mayorista_r*$cantidad_mayorista_r;
+                    $total_mayorista=$total_mayorista_bd+$total_mayorista_r;
+                    $total_cantidades_mayorista=$cantidad_mayorista_bd+$cantidad_mayorista_r;
+                    $fintotal_mayorista=$total_mayorista/$total_cantidades_mayorista;
+                    
+                    $fintotalredondeado=round($fintotal);
+                    $mayoristaredondeado=round($fintotal_mayorista);
+                    
+                    // INSERTANDO EL PROMEDIO PONDERADO
+                    $producto[0]['precio']=$fintotalredondeado;
+                    $producto[0]['cantidad_ingreso']=($cantidad + $cantidad_producto_ingreso);
+                    $producto[0]['cantidad']=$total_cantidades;
+                    $producto[0]['precio_mayorista']=$mayoristaredondeado;
+                    $producto[0]['precio_costo']=$precio_costo;
+                    $producto[0]['oferta']=$oferta;
+                    $producto[0]['descuentoOferta']=$descuento_oferta;
+                    $producto[0]['id_configuraciones']=$configuraciones;
+                    $producto[0]['aplicar_iva']=$aplicar_iva;
+                    // dd($producto[0]);
+                    $producto[0]->save();
+                    $consulta->estado=1;
+                    $consulta->save();
+         
+                    }
+                }
+                  
+
                //Contar la cantidad de compras que si se crearon correctamente
                    $GLOBALS['correct']++;
               }else{
@@ -181,10 +295,6 @@ class CargaMasivaController extends Controller
                     if(!empty($compra_save)){
                         //Contar la cantidad de compras que si se crearon correctamente
                          $GLOBALS['correct']++;
-
-                         //Descontar el inventario del producto de la bodega en caso de que el traslado se haya hecho en la tienda
-                         $producto_bodega->cantidad = $producto_bodega->cantidad - $row->cantidad;
-                         $producto_bodega->save();
 
                     }else{
                       //Contar la cantidad de compras que no se crearon por algun error
