@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\clientes;
 use App\bonos;
+use DB;
 
 class ClientesController extends Controller
 {
@@ -85,5 +86,18 @@ class ClientesController extends Controller
      return $nuevo->id;
       //return response()->json($consulta)->render()
 
+  }
+
+
+  public function clientes(Request $request){
+    $consulta=DB::table('clientes')
+        ->select('clientes.id AS id','clientes.nombres as nombres','clientes.apellidos as apellidos',
+        'clientes.documento as documento','clientes.direccion as direccion','clientes.telefono as telefono',
+        'clientes.fecha_nacimiento AS fecha_nacimiento','clientes.correo as correo','clientes.configuraciones as configuracion'
+        ,'clientes.puntos as puntos_acumulados')
+        ->groupBy('clientes.documento')
+        ->get();
+    // dd($consulta[0]);
+    return view('clientes.clientes', compact('consulta'));
   }
 }

@@ -434,4 +434,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('vista_informe_elkin_devoluciones', 'InformeElkinDevolucionesController@vista_informe_elkin_devoluciones')->name('vista_informe_elkin_devoluciones');
     Route::get('generar_informe_elkin_devoluciones', 'InformeElkinDevolucionesController@generar_informe_elkin_devoluciones')->name('generar_informe_elkin_devoluciones');
 
+
+    /*==================================================*/
+    // RUTAS PARA CLIENTES
+    /*==================================================*/
+    Route::get('clientes', 'ClientesController@clientes')->name('clientes');
+
   });

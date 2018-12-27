@@ -158,6 +158,12 @@
               <span class="hide-menu">Auditorias</span>
           </a>
         </li>
+        <li>
+          <a href="{{ route('clientes') }}" class="collapse " href="javascript:void(0)" aria-expanded="true">
+              <i class="mdi mdi-wrench"></i>
+              <span class="hide-menu">CLientes</span>
+          </a>
+        </li>
         {{-- @can('') --}}
         <li>
           <a href="{{ route('inventario_bodega') }}" class="collapse " href="javascript:void(0)" aria-expanded="true">
