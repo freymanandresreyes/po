@@ -408,6 +408,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('subir_carga_masiva_compras', 'CargaMasivaController@subir_carga_masiva_compras')->name('subir_carga_masiva_compras');
     Route::get('carga_masiva_productos', 'CargaMasivaController@carga_masiva_productos')->name('carga_masiva_productos');
     Route::post('subir_carga_masiva_productos', 'CargaMasivaController@subir_carga_masiva_productos')->name('subir_carga_masiva_productos');
+    Route::post('subir_carga_masiva_productos_grupo_tienda', 'CargaMasivaController@subir_carga_masiva_productos_grupo_tienda')->name('subir_carga_masiva_productos_grupo_tienda');
     /*==================================================*/
     // RUTAS PARA INFORME DON ELKIN
     /*==================================================*/
