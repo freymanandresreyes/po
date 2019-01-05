@@ -597,17 +597,30 @@ class FacturasController extends Controller
 
     public function ver_facturas(Request $request)
     {
+
         $usuario = $request->user()->id;
         $tienda = $request->user()->tienda;
         $info_tienda = tiendas::find($tienda);
+
+       //Formatear las fechas recibidas para realizar la consulta
+       $desde = date("Y-m-d H:i:s", strtotime($request->desde));
+       $hasta = date("Y-m-d 23:59:59", strtotime($request->hasta));
+
+       if(!empty($request->desde) && !empty($request->hasta)){ 
+
         $consulta=DB::table('facturas')
                     ->select('facturas.estado AS estado','facturas.id AS id_factura','facturas.n_factura AS Numero_Factura','clientes.nombres AS Nombre_Cliente',
-                    'clientes.documento AS Cedula_Cliente','facturas.created_at AS Fecha',
-                    DB::raw('DATE_FORMAT(facturas.created_at, "%H:%i:%s") AS hora'),DB::raw('SUM(facturas.total) total'))
+                    'clientes.documento AS Cedula_Cliente','facturas.updated_at AS Fecha',
+                    DB::raw('DATE_FORMAT(facturas.updated_at, "%H:%i:%s") AS hora'),DB::raw('SUM(facturas.total) total'),'facturas.created_at')
                     ->join('clientes', 'facturas.id_cliente', '=', 'clientes.id')
-                    ->where('facturas.id_tienda',$tienda)
+                    ->where('facturas.id_tienda','=',$tienda)
+                    ->whereDate('facturas.created_at', '>=', $desde)->whereDate('facturas.created_at','<=',$hasta)
                     ->groupBy('facturas.n_factura')
                     ->get();
+        }else{
+            $consulta = '';
+        }
+
         return view('caja.facturas', compact('consulta', 'info_tienda'));
     }
 

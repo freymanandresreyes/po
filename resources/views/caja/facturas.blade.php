@@ -1,9 +1,37 @@
 @extends('layout') 
 @section('contenido')
 <div class="card">
+     <div class="card-header bg-info">
+      <h4 class="m-b-0 text-white">VISUALIZAR FACTURAS</h4>
+    </div>
     <div class="card-body">
-
-        <div class="table-responsive m-t-40">
+        <p>* Ingresa desde y hasta que fecha quieres ver las facturas.</p>
+     <form method="GET" action="{{ route('ver_facturas') }}">
+    <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="control-label col-md-3">DESDE:</label>
+        <div class="col-md-9">
+            <input type="date" name="desde" class="form-control custom-select" id="desde" required="">
+        </div>
+      </div>
+    </div>
+      <div class="col-md-6">
+      <div class="form-group row">
+        <label class="control-label col-md-3">HASTA:</label>
+        <div class="col-md-9">
+            <input type="date" name="hasta" class="form-control custom-select" id="hasta" required="">
+        </div>
+      </div>
+    </div>
+  </div>
+      <div class="text-right">
+  <button type="submit" class="btn btn-success">GENERAR FACTURAS</button>
+</div>
+</form>
+<hr>
+@if(!empty($consulta))
+        <div class="table-responsive">
             <table id="myTable" class="table table-bordered table-striped">
                 <thead>
 
@@ -45,8 +73,10 @@
                 </tbody>
             </table>
         </div>
+@endif
     </div>
 </div>
+@if(!empty($consulta))
 <!-- MODAL FACTURA -->
 <div id="modal_factura" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
     style="display: none;">
@@ -91,6 +121,7 @@
     </div>
 </div>
 <!-- /.modal -->
+@endif
 @endsection
  
 @section('factura')

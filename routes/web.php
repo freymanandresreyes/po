@@ -111,7 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('caja_registradora', 'FacturasController@caja_registradora')->name('caja_registradora');
     Route::post('crear_facturas', 'FacturasController@crear_facturas');
     Route::get('generar_factura', 'FacturasController@generar_factura');
-    Route::get('ver_facturas',["as" => "ver_facturas", "uses" => "FacturasController@ver_facturas"]);
+    Route::get('ver_facturas', "FacturasController@ver_facturas")->name('ver_facturas');
     Route::get('factura_show', 'FacturasController@factura_show');
     Route::get('devoluciones', 'FacturasController@devoluciones_ver')->name('devoluciones_ver');
     Route::get('buscar_factura','FacturasController@buscar_factura');
