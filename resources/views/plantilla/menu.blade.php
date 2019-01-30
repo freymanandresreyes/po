@@ -164,6 +164,14 @@
               <span class="hide-menu">CLientes</span>
           </a>
         </li>
+        <!-- //MODULO DICIEMBRE ENERO -->
+        <li>
+          <a href="{{ route('decoluciones2018') }}" class="collapse " href="javascript:void(0)" aria-expanded="true">
+              <i class="mdi mdi-calendar-check"></i>
+              <span class="hide-menu">Devoluciones 2018</span>
+          </a>
+        </li>
+        <!-- // FIN DEL MODULO DICIEMBRE ENERO -->
         {{-- @can('') --}}
         <li>
           <a href="{{ route('inventario_bodega') }}" class="collapse " href="javascript:void(0)" aria-expanded="true">

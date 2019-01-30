@@ -441,4 +441,11 @@ Route::group(['middleware' => 'auth'], function () {
     /*==================================================*/
     Route::get('clientes', 'ClientesController@clientes')->name('clientes');
 
+
+    /*==================================================*/
+    // RUTAS PARA DEVOLUCIONES 2018
+    /*==================================================*/
+    Route::get('decoluciones2018', 'Devoluciones2018Controller@decoluciones2018')->name('decoluciones2018');
+    Route::get('guardar_devolucion2018', 'Devoluciones2018Controller@guardar_devolucion2018')->name('guardar_devolucion2018');
+
   });

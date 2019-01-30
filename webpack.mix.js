@@ -114,7 +114,10 @@ mix.scripts([
     "resources/assets/js/auditorias/auditorias.js",
 
     //INFORMES AUDITORIAS
-    "resources/assets/js/informe_elkin_devoluciones/buscar_informe_devoluciones.js"
+    "resources/assets/js/informe_elkin_devoluciones/buscar_informe_devoluciones.js",
+
+    //DEVOLUCIONES 2018
+    "resources/assets/js/devoluciones2018/devoluciones2018.js"
   ],
   "public/js/compilados.js"
 );
