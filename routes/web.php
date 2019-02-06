@@ -440,12 +440,28 @@ Route::group(['middleware' => 'auth'], function () {
     // RUTAS PARA CLIENTES
     /*==================================================*/
     Route::get('clientes', 'ClientesController@clientes')->name('clientes');
-
-
+    
+    
     /*==================================================*/
     // RUTAS PARA DEVOLUCIONES 2018
     /*==================================================*/
     Route::get('decoluciones2018', 'Devoluciones2018Controller@decoluciones2018')->name('decoluciones2018');
     Route::get('guardar_devolucion2018', 'Devoluciones2018Controller@guardar_devolucion2018')->name('guardar_devolucion2018');
+    
 
+
+
+
+
+
+
+
+
+    //////////////////////////////
+    //////////////////////////////
+    //////////////////////////////
+    //////////////////////////////
+    //////////////////////////////
+    Route::get('prueba', 'ClientesController@prueba')->name('prueba');
+    Route::get('prueba2', 'ClientesController@prueba2')->name('prueba2');
   });

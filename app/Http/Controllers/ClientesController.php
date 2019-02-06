@@ -3,12 +3,101 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\clientes;
 use App\bonos;
 use DB;
+use App\clientes;
+use App\configuraciones;
+use App\consecutivos;
+use App\facturas;
+use App\Notifications\MensajeFacturaAnulada;
+use App\productos;
+use App\saldos;
+use App\separados;
+use App\tiendas;
+use App\tiposdepagos;
+use App\Traits\ControlCaja;
+use App\User;
+use App\vendedores;
+use App\config_usuarios;
+use App\categorias;
+use App\subcategorias;
 
 class ClientesController extends Controller
 {
+
+
+  public function prueba2(){
+    return view('prueba.index');
+  }
+
+
+  public function prueba(Request $request){
+
+    // $desde='2018-11-27 00:00:00.0000';
+    // $hasta='2018-11-27 23:59:00.0000';
+    $desde=$request->fecha1_prueba;
+    $hasta=$request->fecha2_prueba;
+
+    $tiendas = DB::table('tiendas')
+    ->select('id', 'slug')
+    ->where('tiendas.id','!=','6')
+    ->where('tiendas.id','!=','7')
+    ->where('tiendas.id','!=','8')
+    ->where('tiendas.id','!=','9')
+    ->where('tiendas.id','!=','14')
+    ->where('tiendas.id','!=','15')
+    ->where('tiendas.id','!=','16')
+    ->where('tiendas.id','!=','17')
+    ->where('tiendas.id','!=','19')
+    ->where('tiendas.id','!=','20')
+    ->get();
+
+
+    $final=[];
+    $final2=[];
+    for ($i = 0; $i <= (count($tiendas)) - 1; $i++) {
+      // dd($tiendas[$i]->id);
+      $var_id=$tiendas[$i]->id;
+      $cant_vent_detal=DB::table('facturas')                   
+      ->select('tiendas.slug','tiendas.id',DB::raw('SUM(facturas.cantidad) cant_detal'),DB::raw('SUM(facturas.total) total_detal'))
+      ->join('tiendas', 'facturas.id_tienda', '=', 'tiendas.id')
+      ->where('facturas.id_tienda','=',$var_id)
+      ->where('facturas.tipo_factura','=','1')
+      ->where('facturas.estado','!=','1')
+      ->where('facturas.id_clasificaciones','!=','1')
+      ->where('facturas.cantidad','!=','0')
+      ->whereDate('facturas.created_at', '>=', $desde)
+      ->whereDate('facturas.created_at','<=',$hasta)
+      ->orderBy('tiendas.id')
+      ->get();
+      $final[]=$cant_vent_detal;
+      $cant_vent_detal='';
+      // dd($cant_vent_detal);
+      $cant_vent_mayor=DB::table('facturas')                   
+      ->select('tiendas.slug','tiendas.id',DB::raw('SUM(facturas.cantidad) cant_mayor'),DB::raw('SUM(facturas.total) total_mayor'))
+      ->join('tiendas', 'facturas.id_tienda', '=', 'tiendas.id')
+      ->where('facturas.id_tienda','=',$var_id)
+      ->where('facturas.tipo_factura','=','2')
+      ->where('facturas.estado','!=','1')
+      ->where('facturas.id_clasificaciones','!=','1')
+      ->where('facturas.cantidad','!=','0')
+      ->whereDate('facturas.created_at', '>=', $desde)
+      ->whereDate('facturas.created_at','<=',$hasta)
+      ->orderBy('tiendas.id')
+      ->get();
+      $final2[]=$cant_vent_mayor;
+      $cant_vent_mayor='';
+    }
+    // dd($final[0][0]->slug);
+    // return view('clientes.prueba', compact('final','final2'));
+    return response()->json(view('clientes.prueba', compact(
+      'final',
+      'final2'
+  ))->render());
+  }
+
+
+
   public function clienteConsultar(Request $request){
     $documento = $request->cedula;
 

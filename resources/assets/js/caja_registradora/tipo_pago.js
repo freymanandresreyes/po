@@ -15,6 +15,11 @@ $('#tipo_pago').on('click', function () {
         $("#input_tarjeta").css({
             "display": "none",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+        
         $("#tipo_pago_select").css({
             "display": "none",
         });
@@ -79,6 +84,11 @@ $('#tipo_pago').on('click', function () {
         $("#input_tarjeta_dos").css({
             "display": "block",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
         $("#input_efectivo_efectivo").css({
             "display": "none",
         });
@@ -177,6 +187,11 @@ $('#tipo_pago').on('click', function () {
         $("#numero_factura").css({
             "display": "none",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
         $("#numero_factura").val('');
         $("#valor_uno").css({
             "display": "none",
@@ -260,6 +275,11 @@ $('#tipo_pago').on('click', function () {
         $("#input_efectivo_efectivo").css({
             "display": "none",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
         $("#saldo_abono").css({
             "display": "none",
         });
@@ -330,6 +350,11 @@ $('#tipo_pago').on('click', function () {
         $("#valor_uno").css({
             "display": "none",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
         $("#tipo_pago_select_dos").css({
             "display": "none",
         });
@@ -419,6 +444,11 @@ $('#tipo_pago').on('click', function () {
         $("#input_tarjeta_dos").css({
             "display": "none",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
         $("#input_efectivo_efectivo").css({
             "display": "none",
         });
@@ -509,6 +539,10 @@ $('#tipo_pago').on('click', function () {
         $("#input_tarjeta_dos").css({
             "display": "none",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
         //input pagos efectivo
         $("#input_efectivo_efectivo").css({
             "display": "block",
@@ -586,6 +620,10 @@ $('#tipo_pago').on('click', function () {
             "display": "none",
         });
         $("#input_tarjeta").css({
+            "display": "none",
+        });
+
+        $("#input_transaccion").css({
             "display": "none",
         });
         
@@ -680,6 +718,10 @@ $('#tipo_pago').on('click', function () {
             "display": "none",
         });
 
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
         $('#caja_tarjeta').prop('disabled', false);
 
          /************************************************ */
@@ -767,6 +809,11 @@ $('#tipo_pago').on('click', function () {
         $("#numero_factura").css({
             "display": "none",
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
         $("#numero_factura").val('');
 
         $('#caja_tarjeta').prop('disabled', false);
@@ -864,6 +911,98 @@ $('#tipo_pago').on('click', function () {
         $('#seleccionar_iva').css({
             "display": "block"
         });
+
+        $("#input_transaccion").css({
+            "display": "none",
+        });
+
+        /****************+ FIN *************************** */
+    }
+    if (tipo == 12) {
+        $("#documento_cliente").prop('disabled',false);
+        $('#id_tipo_pago').val('');
+        $('#lista_bancos').val('');
+        $("#input_efectivo").css({
+            "display": "none",
+        });
+
+        $("#input_tarjeta").css({
+            "display": "none",
+        });
+
+        $("#input_cambio").css({
+            "display": "none",
+        });
+
+        $("#tipo_pago_select").css({
+            "display": "none",
+        });
+        $("#franquicias").css({
+            "display": "none",
+        });
+        $("#valor_uno").css({
+            "display": "none",
+        });
+        $("#input_transaccion").css({
+            "display": "block",
+        });
+        $("#tipo_pago_select_dos").css({
+            "display": "none",
+        });
+        $("#franquicias_dos").css({
+            "display": "none",
+        });
+        $("#valor_dos").css({
+            "display": "none",
+        });
+        $("#input_efectivo").css({
+            "display": "none",
+        });
+        $("#input_tarjeta").css({
+            "display": "none",
+        });
+        $("#input_tarjeta_dos").css({
+            "display": "none",
+        });
+        $("#input_efectivo_efectivo").css({
+            "display": "none",
+        });
+        $("#saldo_abono").css({
+            "display": "none",
+        });
+        $("#numero_factura").css({
+            "display": "none",
+        });
+        // input saldo sistecredito
+        $("#saldo_sistecredito").css({
+            "display": "none",
+        });
+        $("#numero_factura").val('');
+
+        $('#caja_tarjeta').prop('disabled', false);
+
+        /************************************************ */
+        /*** CODIGO PARA CALCULAR PAGO CON TARJETA CUANDO
+         *   EL PAGO VIENE CON ABONO
+         **************************************************/
+        var valor_abono_puntos = $('#abono').val();
+        var valor_abono = valor_abono_puntos.split('.').join('');
+        if (valor_abono.length != 0) {
+            $("#saldo_abono").css({
+                "display": "block",
+            });
+            //  alert('con abono');
+            var precio_total_puntos = $('#precioTotal').html();
+            var precio_total = precio_total_puntos.split('.').join('');
+            var valor = parseFloat(precio_total)-parseFloat(valor_abono);
+            $('#caja_tarjeta_dos').val(valor.toLocaleString());
+
+        } else {
+
+            var precio_total_puntos = $('#precioTotal').html();
+            
+            $('#caja_tarjeta_dos').val(precio_total_puntos);
+        }
 
         /****************+ FIN *************************** */
     }

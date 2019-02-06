@@ -50,6 +50,9 @@ $("#vender_producto").click(function (e) {
     var valor_saldo_tarjeta_tarjeta_uno_puntos = $('#saldo_valor').val();
     var valor_saldo_tarjeta_dos_puntos = $('#saldo_valor_dos').val();
 
+
+    var transacciones_puntos = $('#caja_transacciones').val();
+
     //valores sin separadores
     //precio total de la compra
     var precio_total = precio_total_puntos.split('.').join('');
@@ -65,6 +68,12 @@ $("#vender_producto").click(function (e) {
     var valor_saldo_tarjeta_tarjeta_uno = valor_saldo_tarjeta_tarjeta_uno_puntos.split('.').join('');
     // saldo efectivo tarjeta uno
     var valor_saldo_efectivo_tarjeta_uno = valor_saldo_efectivo_tarjeta_uno_puntos.split('.').join('');
+
+
+
+    var transacciones = transacciones_puntos.split('.').join('');
+
+
 
     var id_cliente = $("#id_cliente").val();// captura el id del cliente
     var tag_factura = $('#tag_factura').val(); // captura el tag de la factura
@@ -322,6 +331,11 @@ $("#vender_producto").click(function (e) {
         }
     }
 
+    if(tipo_pago == 12){
+        valor_abono=0;
+        id_pago=null;
+    }
+
     if (documento == null || documento == "") {
         alertify.error("No se encontro ningun cliente");
         return false;
@@ -381,10 +395,11 @@ $("#vender_producto").click(function (e) {
     //inicio del ajax 
     var fecha_factura = $('#fecha_factura').val();
     var check_mayorista = $('#check_mayorista').val();
-    var url = getAbsolutePath() + 'crear_facturas';
-
+    var url = getAbsolutePath() + "crear_facturas";
+    console.log(url);
     $("#vender_producto").prop('disabled',true);
-    // alert(precio_total);
+    
+
     $.ajax({
         url: url,
         type: 'POST',
@@ -412,7 +427,8 @@ $("#vender_producto").click(function (e) {
             fecha_factura: fecha_factura,
             saldo_sistecredito: saldo_sistecredito,
             saldo_tarjeta_uno: saldo_tarjeta_uno,
-            name_tag_factura: name_tag_factura
+            name_tag_factura: name_tag_factura,
+            transacciones: transacciones
         },
         dataType: 'json',
         success: function (respuesta) {
@@ -421,7 +437,7 @@ $("#vender_producto").click(function (e) {
 
         }//fin del success
     });
-    //fin de ajax
+    // fin de ajax
 
     //********************************
     // console.log("este es el numero de factura" + $('#numero_factura').html());

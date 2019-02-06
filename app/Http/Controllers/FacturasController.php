@@ -88,6 +88,7 @@ class FacturasController extends Controller
 
     public function crear_facturas(Request $request)
     {
+        $ddd=$request->tipo_pago;
         $usuario = $request->user()->id;
         $tienda = $request->user()->tienda;
         $productos = $request->productos;
@@ -111,6 +112,8 @@ class FacturasController extends Controller
         $valor_saldo_efectivo_tarjeta_uno = $request->valor_saldo_efectivo_tarjeta_uno;
         //saldo sistecredito
         $saldo_sistecredito = $request->saldo_sistecredito;
+        //saldo transaccion
+        $saldo_transaccion = $request->transacciones;
 
         //variables de bancos
         $id_pago = $request->id_pago;
@@ -384,6 +387,17 @@ class FacturasController extends Controller
 
                    
                 }
+                if($tipo_pago == 12){
+                    // dd('pago con transaccion');
+                    // $nueva_factura->facturacion = $request->name_tag_factura;
+                    $nueva_factura->pago_efectivo = 0;
+                    $nueva_factura->pago_tarjeta = 0;
+                    $nueva_factura->pago_tarjeta_dos = 0;
+                    $nueva_factura->pago_abono = 0;
+                    $nueva_factura->pago_sistecredito = 0;
+                    $nueva_factura->pagos_bless = 0;
+                    $nueva_factura->pago_transaccion = floatval($saldo_transaccion)/ count($productos);
+                }
 
 
                 $nueva_factura->tipo_compra = $tipo_pago;
@@ -579,7 +593,9 @@ class FacturasController extends Controller
             if ($contenido[0]['tipo_compra'] == 5) {
                 $tipo_pago = 'DEVOLUCIÓN';
             }
-
+            if ($contenido[0]['tipo_compra'] == 12) {
+                $tipo_pago = 'CONSIGNACCION';
+            }
             $datos_asesor = vendedores::find($asesor);
             $id_cliente = $contenido[0]['id_cliente'];
             $num_facturta = $contenido[0]['n_factura'];

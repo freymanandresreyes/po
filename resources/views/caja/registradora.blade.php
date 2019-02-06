@@ -106,13 +106,17 @@
                   <input type="radio" name="tipopago" value="11" id="radio11" />
                   <label for="radio11"><i class="ti-credit-card"></i> Pagos Bless.</label>
                 </div>
-                  <div class="funkyradio-warning">
+                <div class="funkyradio-warning">
                   <input type="radio" name="tipopago" value="12" id="radio12" />
-                  <label for="radio12"><i class="ti-credit-card"></i> Pagos con cheque.</label>
+                  <label for="radio12"><i class="ti-credit-card"></i> Pagos con Transaccion.</label>
                 </div>
                   <div class="funkyradio-warning">
                   <input type="radio" name="tipopago" value="13" id="radio13" />
-                  <label for="radio13"><i class="ti-credit-card"></i> Pagos con bono.</label>
+                  <label for="radio13"><i class="ti-credit-card"></i> Pagos con cheque.</label>
+                </div>
+                  <div class="funkyradio-warning">
+                  <input type="radio" name="tipopago" value="14" id="radio14" />
+                  <label for="radio14"><i class="ti-credit-card"></i> Pagos con bono.</label>
                 </div>
               </div>
               {{-- ******************** --}}
@@ -601,6 +605,26 @@
                           </div>
                           <!--/span-->
                         </div>
+
+
+
+
+                        {{-- <!--/**** PAGO CON TRANSACCION *****************--> --}}
+                        <div class="row" id="input_transaccion" style="display: none">
+                          <!--/span-->
+                          <div class="col-md-12">
+                            <div class="form-group row ">
+                              <label class="control-label text-right col-md-8">Total transaccion:</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control" value="0" disabled id="caja_transacciones" onkeyup="puntitos(this,this.value.charAt(this.value.length-1))">
+                              </div>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+
+
+
 
                         {{-- <!--/************* INPUT PARA MOSTRAR EL CAMBIO ************--> --}}
                         <div class="row" id="input_cambio" style="display: block">

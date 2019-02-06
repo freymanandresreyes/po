@@ -181,6 +181,12 @@
         </li>
         {{-- @endcan --}}
         <!-- Fin menu -->
+        <li>
+          <a href="{{ route('prueba2')}}" class="collapse " href="javascript:void(0)" aria-expanded="true">
+              <i class="mdi mdi-wrench"></i>
+              <span class="hide-menu">PRUEBA</span>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- End Sidebar navigation -->

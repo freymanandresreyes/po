@@ -18,6 +18,8 @@ function calcular_saldo() {
   var precio_total =(parseFloat(subTotal) + parseFloat(precioIva));
   // console.log('precio total:' + precio_total);
 
+  $("#caja_transacciones").val(precio_total.toLocaleString());
+
   $("#subtotal").html(subTotal.toLocaleString());
   $("#iva").html(precioIva.toLocaleString());
   $("#precioTotal").html(precio_total.toLocaleString());
