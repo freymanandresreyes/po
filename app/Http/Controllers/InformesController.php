@@ -1109,11 +1109,12 @@ class InformesController extends Controller
                         $total_pago_mixto_abono = $total_pago_mixto_abono + $objeto_final[$i][11];
                     }
 
-                }
+                } 
 
                 /**************************** */
                 /**  TOTAL APARTADOS */
                 $total_pago_efectivo_apartado = null;
+                
                 $tarjeta_apartado_uno = null;
                 $tarjeta_apartado_dos = null;
                 // dd($objeto_final_apartado);
@@ -1128,17 +1129,17 @@ class InformesController extends Controller
                 //TOTAL VENTA SISTECREDITO
                 $total_venta_diaria_sistecredito = 0;
                 for ($i = 0; $i < count($objeto_final); $i++) {
+                    
                     $total_venta_diaria_sistecredito = $total_venta_diaria_sistecredito + $objeto_final[$i][12];
                 }
                 $total_pago_tarjeta_apartado = $tarjeta_apartado_uno + $tarjeta_apartado_dos;
-
 
                 $consulta = facturas::where('estado', '==', 0)
                     ->where('id_tienda', $tienda)
                     ->where('facturacion','!=',3)
                     ->where('facturas.facturacion','=',0)
                     ->where('facturas.estado','=',0)
-                    ->whereDate('created_at', '>=', $inicio)->whereDate('created_at', '<=', $fin)->select('pago_sistecredito')->get();
+                    ->whereDate('created_at', '>=', $inicio)->whereDate('created_at', '<=', $fin)->select('pago_sistecredito','pago_transaccion')->get();
 
                 $total_sistecredito=0;
                 for ($i = 0; $i < count($consulta); $i++) {
@@ -1146,6 +1147,14 @@ class InformesController extends Controller
                         $consulta[$i]['pago_sistecredito'] = 0;
                     }
                     $total_sistecredito = $total_sistecredito + $consulta[$i]['pago_sistecredito'];
+                }
+
+                $total_venta_diaria_consignacion=0;
+                for ($i = 0; $i < count($consulta); $i++) {
+                    if($consulta[$i]['pago_transaccion']==null){
+                        $consulta[$i]['pago_transaccion'] = 0;
+                    }
+                    $total_venta_diaria_consignacion = $total_venta_diaria_consignacion + $consulta[$i]['pago_transaccion'];
                 }
 
 
@@ -1184,7 +1193,9 @@ class InformesController extends Controller
                     // 'total_venta_diaria_sistecredito'
                     'total_sistecredito',
                     //TOTAL ABONOS DEL DIA
-                    'consulta_abonos_sistecredito'
+                    'consulta_abonos_sistecredito',
+                    //TOTAL ABONOS DEL DIA
+                    'total_venta_diaria_consignacion'
                 ))->render());
             }
 
@@ -1453,7 +1464,7 @@ class InformesController extends Controller
                     ->where('facturacion','!=',3)
                     ->where('facturas.facturacion','=',0)
                     ->where('facturas.estado','=',0)
-                    ->whereDate('created_at', '>=', $fecha1)->whereDate('created_at', '<=', $fecha2)->select('pago_sistecredito')->get();
+                    ->whereDate('created_at', '>=', $fecha1)->whereDate('created_at', '<=', $fecha2)->select('pago_sistecredito','pago_transaccion')->get();
 
                 $total_sistecredito=0;
                 for ($i = 0; $i < count($consulta); $i++) {
@@ -1462,6 +1473,16 @@ class InformesController extends Controller
                     }
                     $total_sistecredito = $total_sistecredito + $consulta[$i]['pago_sistecredito'];
                 }
+
+
+                $total_venta_diaria_consignacion=0;
+                for ($i = 0; $i < count($consulta); $i++) {
+                    if($consulta[$i]['pago_transaccion']==null){
+                        $consulta[$i]['pago_transaccion'] = 0;
+                    }
+                    $total_venta_diaria_consignacion = $total_venta_diaria_consignacion + $consulta[$i]['pago_transaccion'];
+                }
+
 
                 $consulta_abonos_sistecredito = AbonoSistecredito::where('id_tienda', $tienda)
                     ->whereDate('created_at', '>=', $inicio)->whereDate('created_at', '<=', $fin)->sum('valor');
@@ -1503,7 +1524,8 @@ class InformesController extends Controller
                     //SISTECREDITO
                     'total_sistecredito',
                     //ABONOS SISTECREDITO DEL DIA
-                    'consulta_abonos_sistecredito'
+                    'consulta_abonos_sistecredito',
+                    'total_venta_diaria_consignacion'
                 ))->render());
             }
 

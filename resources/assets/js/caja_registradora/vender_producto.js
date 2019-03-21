@@ -52,6 +52,7 @@ $("#vender_producto").click(function (e) {
 
 
     var transacciones_puntos = $('#caja_transacciones').val();
+    var credito_puntos = $('#caja_credito').val();
 
     //valores sin separadores
     //precio total de la compra
@@ -72,8 +73,7 @@ $("#vender_producto").click(function (e) {
 
 
     var transacciones = transacciones_puntos.split('.').join('');
-
-
+    var credito = credito_puntos.split('.').join('');
 
     var id_cliente = $("#id_cliente").val();// captura el id del cliente
     var tag_factura = $('#tag_factura').val(); // captura el tag de la factura
@@ -332,9 +332,31 @@ $("#vender_producto").click(function (e) {
     }
 
     if(tipo_pago == 12){
+
+
+        var id_pago = $("input[name='pago']:checked").val();
+        var id_banco = $('#lista_bancos').val();
+
+
+        if (id_pago == null || id_pago == "") {
+            alertify.error("No se encontro ningun tipo de pago.");
+            return false;
+        }
+        if (id_banco == null || id_banco == "") {
+            alertify.error("La entidad bancaria no puede estar vacía.");
+            return false;
+        }
+
         valor_abono=0;
-        id_pago=null;
+        // id_pago=null;
     }
+    
+    
+    if (tipo_pago == 13) {
+        
+        valor_abono=0;
+    }
+
 
     if (documento == null || documento == "") {
         alertify.error("No se encontro ningun cliente");
@@ -396,10 +418,10 @@ $("#vender_producto").click(function (e) {
     var fecha_factura = $('#fecha_factura').val();
     var check_mayorista = $('#check_mayorista').val();
     var url = getAbsolutePath() + "crear_facturas";
-    console.log(url);
+    console.log(id_pago);
     $("#vender_producto").prop('disabled',true);
     
-
+// return false;
     $.ajax({
         url: url,
         type: 'POST',
@@ -428,7 +450,8 @@ $("#vender_producto").click(function (e) {
             saldo_sistecredito: saldo_sistecredito,
             saldo_tarjeta_uno: saldo_tarjeta_uno,
             name_tag_factura: name_tag_factura,
-            transacciones: transacciones
+            transacciones: transacciones,
+            credito: credito,
         },
         dataType: 'json',
         success: function (respuesta) {

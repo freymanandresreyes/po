@@ -26,10 +26,68 @@ class ClientesController extends Controller
 {
 
 
+  public function index2(){
+    return view('prueba.index2');
+  }
+
+  public function generar_index2(Request $request)
+  {
+    $desde=$request->fecha1_index2;
+    $hasta=$request->fecha2_index2;
+    $tiendas = DB::table('tiendas')
+    ->select('id', 'slug')
+    ->where('tiendas.id','!=','6')
+    ->where('tiendas.id','!=','7')
+    ->where('tiendas.id','!=','8')
+    ->where('tiendas.id','!=','9')
+    ->where('tiendas.id','!=','14')
+    ->where('tiendas.id','!=','15')
+    ->where('tiendas.id','!=','16')
+    ->where('tiendas.id','!=','17')
+    ->where('tiendas.id','!=','19')
+    ->where('tiendas.id','!=','20')
+    ->get();
+
+    for ($i = 0; $i <= (count($tiendas)) - 1; $i++) {
+      $var_id=$tiendas[$i]->id;
+      $cant_vent_detal=DB::table('facturas')                   
+      ->select('tiendas.slug','tiendas.id',DB::raw('SUM(facturas.precio_base * 1.19) total'),DB::raw('SUM(facturas.total) total_suma'))
+      ->join('tiendas', 'facturas.id_tienda', '=', 'tiendas.id')
+      ->where('facturas.id_tienda','=',$var_id)
+      ->where('facturas.descuento','>','0')
+      ->where('facturas.estado','!=','1')
+      ->where('facturas.id_clasificaciones','!=','1')
+      ->where('facturas.cantidad','!=','0')
+      ->whereDate('facturas.created_at', '>=', $desde)
+      ->whereDate('facturas.created_at','<=',$hasta)
+      ->orderBy('tiendas.id')
+      ->get();
+      // dd($cant_vent_detal);
+      $final[]=$cant_vent_detal;
+      $cant_vent_detal='';
+      // dd($final);
+      if($final[$i][0]->total==null)
+                                      
+      $final[$i][0]->total=0;
+      else
+      
+      if($final[$i][0]->total_suma==null)
+      
+      $final[$i][0]->total_suma=0;
+
+      $final[$i][0]->total = $final[$i][0]->total - $final[$i][0]->total_suma;
+
+    }
+        return response()->json(view('clientes.informe_index2', compact(
+          'final'
+      ))->render());
+  }
+
+  // INFORME MAYOR DETAL 
+
   public function prueba2(){
     return view('prueba.index');
   }
-
 
   public function prueba(Request $request){
 

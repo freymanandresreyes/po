@@ -120,7 +120,10 @@ mix.scripts([
     "resources/assets/js/devoluciones2018/devoluciones2018.js",
 
     //INFORME VENTAS MAYOR DETAL Y TOTAL
-    "resources/assets/js/prueba/prueba.js"
+    "resources/assets/js/prueba/prueba.js",
+    
+    //INFORME DON EDGAR DESCUENTO / TOTAL
+    "resources/assets/js/prueba/index2.js"
   ],
   "public/js/compilados.js"
 );

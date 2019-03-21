@@ -110,13 +110,17 @@
                   <input type="radio" name="tipopago" value="12" id="radio12" />
                   <label for="radio12"><i class="ti-credit-card"></i> Pagos con Transaccion.</label>
                 </div>
-                  <div class="funkyradio-warning">
+                <div class="funkyradio-warning">
                   <input type="radio" name="tipopago" value="13" id="radio13" />
-                  <label for="radio13"><i class="ti-credit-card"></i> Pagos con cheque.</label>
+                  <label for="radio13"><i class="ti-credit-card"></i> Pago A Credito.</label>
                 </div>
                   <div class="funkyradio-warning">
                   <input type="radio" name="tipopago" value="14" id="radio14" />
-                  <label for="radio14"><i class="ti-credit-card"></i> Pagos con bono.</label>
+                  <label for="radio14"><i class="ti-credit-card"></i> Pagos con cheque.</label>
+                </div>
+                  <div class="funkyradio-warning">
+                  <input type="radio" name="tipopago" value="15" id="radio15" />
+                  <label for="radio15"><i class="ti-credit-card"></i> Pagos con bono.</label>
                 </div>
               </div>
               {{-- ******************** --}}
@@ -617,6 +621,23 @@
                               <label class="control-label text-right col-md-8">Total transaccion:</label>
                               <div class="col-md-4">
                                 <input type="text" class="form-control" value="0" disabled id="caja_transacciones" onkeyup="puntitos(this,this.value.charAt(this.value.length-1))">
+                              </div>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+ 
+ 
+ 
+ 
+ 
+                        <div class="row" id="input_credito" style="display: none">
+                          <!--/span-->
+                          <div class="col-md-12">
+                            <div class="form-group row ">
+                              <label class="control-label text-right col-md-8">Total credito:</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control" value="0" disabled id="caja_credito" onkeyup="puntitos(this,this.value.charAt(this.value.length-1))">
                               </div>
                             </div>
                           </div>

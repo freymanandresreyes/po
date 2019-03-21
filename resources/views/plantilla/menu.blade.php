@@ -187,6 +187,12 @@
               <span class="hide-menu">PRUEBA</span>
           </a>
         </li>
+        <li>
+          <a href="{{ route('index2')}}" class="collapse " href="javascript:void(0)" aria-expanded="true">
+              <i class="mdi mdi-wrench"></i>
+              <span class="hide-menu">Descuentos / Total</span>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- End Sidebar navigation -->

@@ -19,6 +19,7 @@ function calcular_saldo() {
   // console.log('precio total:' + precio_total);
 
   $("#caja_transacciones").val(precio_total.toLocaleString());
+  $("#caja_credito").val(precio_total.toLocaleString());
 
   $("#subtotal").html(subTotal.toLocaleString());
   $("#iva").html(precioIva.toLocaleString());

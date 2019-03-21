@@ -114,6 +114,8 @@ class FacturasController extends Controller
         $saldo_sistecredito = $request->saldo_sistecredito;
         //saldo transaccion
         $saldo_transaccion = $request->transacciones;
+        //SALDO A CREDITO
+        $saldo_credito = $request->credito;
 
         //variables de bancos
         $id_pago = $request->id_pago;
@@ -396,9 +398,23 @@ class FacturasController extends Controller
                     $nueva_factura->pago_abono = 0;
                     $nueva_factura->pago_sistecredito = 0;
                     $nueva_factura->pagos_bless = 0;
+                    $nueva_factura->id_clase_pago = $id_pago;
+                    $nueva_factura->id_franquicia = $id_banco;
                     $nueva_factura->pago_transaccion = floatval($saldo_transaccion)/ count($productos);
                 }
-
+                if($tipo_pago == 13){
+                    // dd('pago con transaccion');
+                    // $nueva_factura->facturacion = $request->name_tag_factura;
+                    $nueva_factura->pago_efectivo = 0;
+                    $nueva_factura->pago_tarjeta = 0;
+                    $nueva_factura->pago_tarjeta_dos = 0;
+                    $nueva_factura->pago_abono = 0;
+                    $nueva_factura->pago_sistecredito = 0;
+                    $nueva_factura->pagos_bless = 0;
+                    $nueva_factura->id_clase_pago = $id_pago;
+                    $nueva_factura->id_franquicia = $id_banco;
+                    $nueva_factura->pago_credito = floatval($saldo_credito)/ count($productos);
+                }
 
                 $nueva_factura->tipo_compra = $tipo_pago;
                 $nueva_factura->porsentaje_iva = $iva[0]->iva;
@@ -595,6 +611,9 @@ class FacturasController extends Controller
             }
             if ($contenido[0]['tipo_compra'] == 12) {
                 $tipo_pago = 'CONSIGNACCION';
+            }
+            if ($contenido[0]['tipo_compra'] == 13) {
+                $tipo_pago = 'CREDITO';
             }
             $datos_asesor = vendedores::find($asesor);
             $id_cliente = $contenido[0]['id_cliente'];

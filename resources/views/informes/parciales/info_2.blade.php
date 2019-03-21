@@ -42,9 +42,10 @@
                                         <h3><b>Total Abonos Sistecredito:</b> $ {{ number_format($consulta_abonos_sistecredito) }}</h3>
                                         <h3><b>Total Apartados Efectivo:</b> $ {{ number_format($total_pago_efectivo_apartado) }}</h3>
                                         <h3><b>Total Apartados Tarjetas:</b> $ {{ number_format($total_pago_tarjeta_apartado) }}</h3>
+                                        <h3><b>Consignacion:</b> $ {{ number_format($total_venta_diaria_consignacion) }}</h3>
                                         <h3><b>(devoluciones y cambios):</b> $ {{ number_format($total_venta_diaria_abono) }}</h3>
                                         <hr>
-                                        <h3><b>Total :</b> $ {{ number_format($total_venta_diaria_efectivo + $total_tarjetas + $total_pago_tarjeta_apartado  + $total_pago_efectivo_apartado +$total_sistecredito + $total_pago_mixto_tarjeta) }}</h3>
+                                        <h3><b>Total :</b> $ {{ number_format($total_venta_diaria_efectivo + $total_tarjetas + $total_pago_tarjeta_apartado  + $total_pago_efectivo_apartado +$total_sistecredito + $total_pago_mixto_tarjeta + $total_venta_diaria_consignacion) }}</h3>
                                     </div>
                                 <div class="clearfix"></div>
                             </div>

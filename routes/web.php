@@ -464,4 +464,12 @@ Route::group(['middleware' => 'auth'], function () {
     //////////////////////////////
     Route::get('prueba', 'ClientesController@prueba')->name('prueba');
     Route::get('prueba2', 'ClientesController@prueba2')->name('prueba2');
+
+    //////////////////////////////
+    //////////////////////////////
+    //////////////////////////////
+    //////////////////////////////
+    //////////////////////////////
+    Route::get('index2', 'ClientesController@index2')->name('index2');
+    Route::get('generar_index2', 'ClientesController@generar_index2')->name('generar_index2');
   });
