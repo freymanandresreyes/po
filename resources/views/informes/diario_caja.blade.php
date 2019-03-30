@@ -83,6 +83,31 @@
 <div id="informe_general_diario">
 
 </div>
+
+
+
+
+<!--  modal ENCUESTA DIARIA -->
+<div id="modal_encuesta_diaria" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">ENCUESTA DEL DIA</h4>
+      </div>
+      <div class="modal-body" id="cargar_encuesta">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success waves-effect waves-light" id="guardar_encuesta">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- fin modal ENCUESTA DIARIA -->
+
+
+
 @endsection
 
 @section('factura')

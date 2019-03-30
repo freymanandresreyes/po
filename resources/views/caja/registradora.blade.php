@@ -114,13 +114,17 @@
                   <input type="radio" name="tipopago" value="13" id="radio13" />
                   <label for="radio13"><i class="ti-credit-card"></i> Pago A Credito.</label>
                 </div>
-                  <div class="funkyradio-warning">
+                <div class="funkyradio-warning">
                   <input type="radio" name="tipopago" value="14" id="radio14" />
-                  <label for="radio14"><i class="ti-credit-card"></i> Pagos con cheque.</label>
+                  <label for="radio14"><i class="ti-credit-card"></i> Libranza.</label>
                 </div>
-                  <div class="funkyradio-warning">
+                <div class="funkyradio-warning">
                   <input type="radio" name="tipopago" value="15" id="radio15" />
-                  <label for="radio15"><i class="ti-credit-card"></i> Pagos con bono.</label>
+                  <label for="radio15"><i class="ti-credit-card"></i> Pagos con cheque.</label>
+                </div>
+                <div class="funkyradio-warning">
+                  <input type="radio" name="tipopago" value="16" id="radio16" />
+                  <label for="radio16"><i class="ti-credit-card"></i> Pagos con bono.</label>
                 </div>
               </div>
               {{-- ******************** --}}
@@ -228,6 +232,19 @@
                   </div>
                 </div>
               </div>
+
+              <div class="col-md-6" style="display: none" id="empresa_cuotas">
+                <div class="form-group row">
+                  <label class="control-label text-right col-md-3">Cuotas:</label>
+                  <div class="col-md-9">
+                  <select type="text" class="form-control" id="select_seleccionar_cuotas">
+                      <option value="1">Si</option>
+                      <option value="2">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
               <div class="col-md-6" style="display: none" id="seleccionar_iva">
                 <div class="form-group row">
                   <label class="control-label text-right col-md-3">N de factura:</label>
@@ -239,6 +256,10 @@
                   </div>
                 </div>
               </div>
+
+
+
+
             </div>
             <!--/row-->
             <div class="row">
@@ -631,6 +652,21 @@
  
  
  
+                        <div class="row" id="input_credito" style="display: none">
+                          <!--/span-->
+                          <div class="col-md-12">
+                            <div class="form-group row ">
+                              <label class="control-label text-right col-md-8">Total credito:</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control" value="0" disabled id="caja_credito" onkeyup="puntitos(this,this.value.charAt(this.value.length-1))">
+                              </div>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+
+
+
                         <div class="row" id="input_credito" style="display: none">
                           <!--/span-->
                           <div class="col-md-12">

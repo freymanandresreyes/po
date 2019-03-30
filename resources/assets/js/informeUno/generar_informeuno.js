@@ -12,7 +12,7 @@ $('#generar_informe_mator_detal').click(function()
     // var fecha1=fecha1.replace('T', ' ');
     // return(false);
     // var rango2=rango2.replace(' ', '');
-
+    // alert('aca vamos bebe');
     var url= URLdominio+'generar_informeuno';
 
     if(fecha1=="" || fecha2=="")

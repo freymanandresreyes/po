@@ -123,7 +123,12 @@ mix.scripts([
     "resources/assets/js/prueba/prueba.js",
     
     //INFORME DON EDGAR DESCUENTO / TOTAL
-    "resources/assets/js/prueba/index2.js"
+    "resources/assets/js/prueba/index2.js",
+
+
+    // JAVASCRIPT PARA LAS ENCUESTAS DIARIAS
+    "resources/assets/js/encuesta_diaria/mostrar_encuesta.js",
+    "resources/assets/js/encuesta_diaria/guardar_encuesta.js"
   ],
   "public/js/compilados.js"
-);
+  );
